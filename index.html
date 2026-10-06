@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FA Midterm Prep · Glover · Oct 19</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ffffff; --surface:#f1f4f8; --surface2:#e5ebf3; --line:#cfd8e4; --rule:#b9c7d8;
+  --ink:#152238; --ink2:#44536b; --ink3:#7a879a;
+  --cb:#2f6db5; --cb-soft:#dbe7f6; --cb-deep:#1d4f91;
+  --up:#1f7a4d; --up-soft:#dff2e7; --down:#b23a3a; --down-soft:#f8e1e1;
+  --warn:#9a6a00; --warn-soft:#fbf0cf;
+  --font:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0f1724; --surface:#17213a; --surface2:#1f2b48; --line:#2d3b5c; --rule:#3a4a6e;
+    --ink:#e8edf5; --ink2:#b4bfd1; --ink3:#7d8aa3;
+    --cb:#6fa8dc; --cb-soft:#1b3356; --cb-deep:#9cc3ea;
+    --up:#5fcf94; --up-soft:#14362a; --down:#ef8a8a; --down-soft:#3e1d1d;
+    --warn:#e3b64a; --warn-soft:#3b2f12;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0f1724; --surface:#17213a; --surface2:#1f2b48; --line:#2d3b5c; --rule:#3a4a6e;
+  --ink:#e8edf5; --ink2:#b4bfd1; --ink3:#7d8aa3;
+  --cb:#6fa8dc; --cb-soft:#1b3356; --cb-deep:#9cc3ea;
+  --up:#5fcf94; --up-soft:#14362a; --down:#ef8a8a; --down-soft:#3e1d1d;
+  --warn:#e3b64a; --warn-soft:#3b2f12;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.5;font-variant-numeric:tabular-nums;-webkit-text-size-adjust:100%;height:100%}
+*{box-sizing:border-box}
+h1,h2,h3,h4{margin:0;font-weight:600;line-height:1.2}
+p{margin:0 0 .75em}
+button{font:inherit;color:inherit}
+a{color:var(--cb-deep)}
+.wrap{max-width:900px;margin:0 auto;padding:14px 14px 92px}
+header.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:6px 0 10px;border-bottom:2px solid var(--ink)}
+header.top h1{font-size:19px;letter-spacing:-.01em}
+header.top .when{font-size:13px;color:var(--ink2);text-align:right}
+header.top .when b{color:var(--ink);font-weight:600}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));z-index:50}
+nav.tabs button{flex:1;background:none;border:0;padding:6px 0;font-size:10.5px;color:var(--ink3);border-radius:8px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
+nav.tabs button .ic{font-size:17px;line-height:1}
+nav.tabs button.on{color:var(--cb-deep);background:var(--cb-soft)}
+nav.tabs button:focus-visible{outline:2px solid var(--cb);outline-offset:1px}
+section.tab{display:none}
+section.tab.on{display:block}
+.lede{color:var(--ink2);margin:14px 0 10px;font-size:14.5px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 0}
+.card h2{font-size:16px;margin-bottom:8px}
+.card h3{font-size:14.5px;margin:12px 0 6px}
+.muted{color:var(--ink3);font-size:13px}
+.small{font-size:13px}
+.tag{display:inline-block;font-size:11.5px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--ink2);background:var(--paper);vertical-align:middle}
+.tag.in{background:var(--up-soft);color:var(--up);border-color:transparent}
+.tag.pend{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.tag.out{background:var(--surface2);color:var(--ink3);border-color:transparent}
+.tag.cb{background:var(--cb-soft);color:var(--cb-deep);border-color:transparent}
+blockquote{margin:8px 0;padding:6px 12px;border-left:3px solid var(--cb);color:var(--ink2);font-style:italic;font-size:14px}
+blockquote cite{display:block;font-style:normal;font-size:12px;color:var(--ink3);margin-top:3px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:5px 7px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--ink2);font-size:12.5px}
+td.n,th.n{text-align:right;white-space:nowrap}
+tr.total td{border-top:1.5px solid var(--ink);border-bottom:0;font-weight:600}
+tr.sub td{color:var(--ink2)}
+.btn{background:var(--cb);color:#fff;border:0;border-radius:8px;padding:9px 14px;font-weight:500;cursor:pointer}
+.btn.sec{background:var(--surface2);color:var(--ink)}
+.btn.ghost{background:none;border:1px solid var(--line);color:var(--ink2)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible{outline:2px solid var(--cb-deep);outline-offset:2px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select,input[type=number]{font:inherit;padding:8px 10px;border:1px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink);min-width:0}
+select{max-width:100%}
+input[type=number]{width:110px}
+label.f{display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--ink2)}
+details{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0;background:var(--paper)}
+details summary{cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:8px}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";color:var(--ink3);font-size:18px}
+details[open] summary::after{content:"–"}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em}
+pre{white-space:pre-wrap;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px;font-size:13px;line-height:1.45;margin:8px 0}
+.eqbar{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0}
+.eqbar .k{font-size:11.5px;color:var(--ink3)}
+.eqbar .v{font-size:19px;font-weight:600}
+.eqbar .op{font-size:18px;color:var(--ink3)}
+.eqbar .ok{grid-column:1/-1;font-size:12.5px;color:var(--up);display:flex;align-items:center;gap:6px}
+.eqbar .ok.bad{color:var(--down)}
+.stmts{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:720px){.stmts{grid-template-columns:1fr 1fr 1fr}}
+.stmt{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.stmt h3{font-size:14px;margin:0 0 6px;display:flex;justify-content:space-between;align-items:baseline}
+.stmt h3 span{font-size:11.5px;color:var(--ink3);font-weight:400}
+.stmt .ln{display:flex;justify-content:space-between;gap:8px;padding:2.5px 0;font-size:13.5px;border-radius:4px}
+.stmt .ln.hd{color:var(--ink2);font-size:12px;margin-top:6px;border-bottom:1px solid var(--line)}
+.stmt .ln.tot{border-top:1.5px solid var(--ink);font-weight:600;margin-top:3px;padding-top:4px}
+.stmt .ln.hit{background:var(--cb-soft);animation:flash .9s ease-out}
+.stmt .ln.ind{padding-left:12px}
+@keyframes flash{0%{background:var(--cb)}100%{background:var(--cb-soft)}}
+.neg{color:var(--down)}
+.pos{color:var(--up)}
+.je{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0}
+.je .lines{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:14px}
+.je .lines .cr{padding-left:22px}
+.log{font-size:13px;max-height:170px;overflow:auto;border-top:1px solid var(--line);margin-top:8px;padding-top:6px}
+.log div{display:flex;justify-content:space-between;gap:8px;padding:3px 0;border-bottom:1px dashed var(--line)}
+.chooser-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:7px;margin:10px 0}
+.chooser-grid button{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:9px 10px;text-align:left;font-size:13px;cursor:pointer;line-height:1.3}
+.chooser-grid button.on{border-color:var(--cb);background:var(--cb-soft);color:var(--cb-deep)}
+.chooser-grid button .c{display:block;font-size:11px;color:var(--ink3);margin-top:2px}
+.effects{display:grid;grid-template-columns:1fr;gap:8px}
+@media(min-width:560px){.effects{grid-template-columns:1fr 1fr 1fr}}
+.effects .e{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:13.5px}
+.effects .e b{display:block;font-size:12px;color:var(--ink3);font-weight:500;margin-bottom:3px}
+.prob{margin:12px 0}
+.prob .hd{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.prob .sol{border-top:1px dashed var(--line);margin-top:10px;padding-top:10px}
+.check{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.check button{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:4px 11px;font-size:12.5px;cursor:pointer}
+.check button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+ol.plain,ul.plain{margin:4px 0 8px;padding-left:20px}
+ol.plain li,ul.plain li{margin:3px 0}
+.timeline{list-style:none;margin:0;padding:0}
+.timeline li{display:grid;grid-template-columns:62px 1fr auto;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);align-items:start;font-size:13.5px}
+.timeline li .d{color:var(--ink2);font-size:12.5px;white-space:nowrap}
+.timeline li .t b{font-weight:600}
+.timeline li .t .s{display:block;color:var(--ink3);font-size:12px}
+.themebtn{background:none;border:1px solid var(--line);border-radius:999px;padding:2px 9px;font-size:12px;color:var(--ink2);cursor:pointer}
+.formula{background:var(--paper);border:1px dashed var(--rule);border-radius:8px;padding:8px 10px;margin:6px 0;font-size:13.5px}
+.kicker{font-size:13px;color:var(--ink3)}
+.steps .st{border-left:3px solid var(--line);padding:6px 12px;margin:8px 0}
+.steps .st.show{border-left-color:var(--cb)}
+.steps .st h4{font-size:13.5px;margin-bottom:4px;color:var(--cb-deep)}
+.pill{display:inline-block;padding:4px 11px;border-radius:999px;border:1px solid var(--line);background:var(--paper);font-size:12.5px;cursor:pointer}
+.pill.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.mark{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.mark button{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 12px;font-size:12.5px;cursor:pointer}
+.mark button.on.Solid{background:var(--up-soft);color:var(--up);border-color:var(--up)}
+.mark button.on.Shaky{background:var(--warn-soft);color:var(--warn);border-color:var(--warn)}
+.mark button.on.Missed{background:var(--down-soft);color:var(--down);border-color:var(--down)}
+.trap .wrong{text-decoration:line-through;color:var(--down);display:block;margin:4px 0}
+.trap .right{display:block;color:var(--ink);margin:4px 0}
+.trap .why{color:var(--ink2);font-size:13.5px;margin-top:6px}
+.day{display:grid;grid-template-columns:72px 1fr 26px;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);align-items:start;cursor:pointer}
+.day .dd{font-size:12.5px;color:var(--ink2)}
+.day .dd b{display:block;color:var(--ink);font-size:14px}
+.day .dt{font-size:13.5px}
+.day .dt .fixed{color:var(--cb-deep);font-weight:500}
+.day .dt .s{color:var(--ink2);font-size:12.5px}
+.day .ck{width:20px;height:20px;border:1.5px solid var(--rule);border-radius:5px;margin-top:3px;text-align:center;font-size:13px;line-height:17px}
+.day.done .ck{background:var(--up);border-color:var(--up);color:#fff}
+.day.done .dt{color:var(--ink3);text-decoration:line-through}
+.day.today .dd b{color:var(--cb-deep)}
+.intel-day{margin:10px 0}
+.intel-day h3{font-size:13.5px;color:var(--ink2);margin:0 0 4px}
+.intel-day li{margin:3px 0}
+@media (prefers-reduced-motion: reduce){.stmt .ln.hit{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div>
+    <h1>Financial Accounting midterm</h1>
+    <div class="kicker">B6001 · Prof. Glover · Cluster F · <button class="themebtn" id="themeBtn" type="button">theme</button></div>
+  </div>
+  <div class="when"><b id="daysLeft"></b><br>Mon Oct 19, 2026</div>
+</header>
+
+<!-- ============ SCOPE ============ -->
+<section class="tab on" id="tab-scope">
+  <p class="lede">What is on the exam, in Glover's own words, and how the exam is run. Built from the nine recordings through Sep 29, the slide decks, PS1 to PS4, and the three cases. It gets extended as new material is added.</p>
+
+  <div class="card">
+    <h2>Scope as Glover has stated it</h2>
+    <blockquote>"The cutoff is really revenue recognition."<cite>Oct 1 session, answering a question about how to start reviewing</cite></blockquote>
+    <blockquote>"We've just got to cover revenue recognition, and those are all the topics covered."<cite>Sep 29 session</cite></blockquote>
+    <p class="small">So the midterm is Sep 1 through Oct 6. Receivables and inventory are taught before the exam but sit after the cutoff, and neither shows up on the 2023, 2024 or 2025 midterms. Worth one confirming question on Oct 15, but plan around them being out.</p>
+    <ul class="timeline" id="scopeList"></ul>
+  </div>
+
+  <div class="card"><h2>The exam, from the three practice midterms</h2>
+   <p class="small">Same four questions every year, 200 points. He said on Oct 1 they "tend to be kind of similar" and "there'll always be something a little bit different."</p>
+   <div class="scroll"><table>
+    <tr><th>Q</th><th>Type</th><th class="n">Pts</th><th>2023</th><th>2024</th><th>2025</th></tr>
+    <tr><td>1</td><td>Transactions: plug a missing balance, record every entry, IS, BS</td><td class="n">60</td><td>Triathlon</td><td>FYR (genetics kits)</td><td>Jersey, Inc.</td></tr>
+    <tr><td>2</td><td>Indirect CFS from two balance sheets plus notes</td><td class="n">40</td><td>Shake Shack</td><td>Beet's</td><td>Dairy Co.</td></tr>
+    <tr><td>3</td><td>Five-step revenue recognition on a bundle</td><td class="n">40</td><td>Tesla Model 3</td><td>LG OLED TV</td><td>NVIDIA RTX 4090</td></tr>
+    <tr><td>4</td><td>Reading a real 10-K, ten short parts</td><td class="n">60</td><td>Target</td><td>Home Depot</td><td>Chipotle</td></tr>
+   </table></div>
+   <p class="small" style="margin-top:8px">Excel on your laptop under Proctorio. You can submit the .xlsx directly, no PDF conversion. No Excel template of your own (Oct 1). Two one-sided cheat sheet pages. Balance sheet equation or DR/CR both accepted. Full detail by session is in Intel.</p></div>
+  <div class="card">
+    <h2>Explicitly out or not tested</h2>
+    <ul class="plain small">
+      <li>Working backward from T-accounts to cash flows in the way he likes: "It doesn't mean it's gonna be on the exam... I would really get pushback from my colleagues" (Sep 29).</li>
+      <li>Growth versus maintenance capex: "not going to be on the exams" (Sep 29).</li>
+      <li>Internally generated intangibles and capitalizing R&amp;D as a valuation question: "It's not gonna be on the midterm" (Sep 2).</li>
+      <li>Foreign currency and functional currency: "we will only touch on it" (Sep 2).</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Five days he said he'd be around</h2>
+    <p class="small">He answers email over the weekend before the exam but gets "a little nervous when a student's asking me a question at midnight before the exam." Review sessions Fri 12:30 to 2:00 (Geffen 420), office hours Fri 2 to 3 (Kravis 680). His own office hours Tue 2:30 to 3:30, Kravis 521.</p>
+  </div>
+</section>
+
+<!-- ============ POST IT ============ -->
+<section class="tab" id="tab-post">
+  <p class="lede">Post an entry and watch it land on all three statements at once. Every posting is a set of changes with ΔA = ΔL + ΔE, which is exactly how he wants it written on the exam. The cash flow statement is rebuilt from scratch after each posting, indirect and direct, and the two must tie.</p>
+
+  <div class="card">
+    <h2>Opening balance sheet, Jan 1</h2>
+    <p class="muted">Modeled on the DEF and GIJoe setups from PS3 and PS4 (there was a prepaid, a customer advance, and a contra asset). Starting retained earnings is the plug, the way part (a) of those problems makes you find it.</p>
+    <div class="row">
+      <label class="f">Transaction
+        <select id="txSel"></select>
+      </label>
+      <label class="f" id="p1wrap">Amount <input type="number" id="p1" value="100" step="1"></label>
+      <label class="f" id="p2wrap">Second amount <input type="number" id="p2" value="60" step="1"></label>
+    </div>
+    <p class="muted" id="txHelp" style="margin-top:6px"></p>
+    <div class="row" style="margin-top:8px">
+      <button class="btn" id="postBtn" type="button">Post entry</button>
+      <button class="btn sec" id="undoBtn" type="button">Undo last</button>
+      <button class="btn ghost" id="resetBtn" type="button">Reset to Jan 1</button>
+      <button class="btn ghost" id="drcrBtn" type="button">Show DR/CR</button>
+    </div>
+  </div>
+
+  <div class="eqbar" id="eqbar"></div>
+
+  <div class="je" id="jeBox"><span class="muted">Nothing posted yet. Pick a transaction and post it.</span></div>
+
+  <div class="stmts" id="stmts"></div>
+
+  <div class="card">
+    <h2>Journal so far</h2>
+    <div class="log" id="log"><span class="muted">Empty.</span></div>
+  </div>
+
+  <div class="card">
+    <h2>Why this is the mechanic</h2>
+    <p class="small">Glover's phrase for it on Sep 22: assets are "expenses waiting to happen." Everything on the midterm's problem one is this loop: a transaction changes two or more accounts, the balance sheet absorbs the stock, the income statement records the flow through the retained earnings column, and the cash flow statement explains the one account that is not an accrual. If you can see the three statements move together, you can rebuild any of them from the other two, which is what the cash flow problem asks you to do.</p>
+  </div>
+</section>
+
+<!-- ============ TREATMENT ============ -->
+<section class="tab" id="tab-treat">
+  <p class="lede">Pick the situation. You get the entry in balance sheet equation form, the statement effects, the example he used in class, and the trap.</p>
+  <div class="chooser-grid" id="chooser"></div>
+  <div id="treatOut"></div>
+</section>
+
+<!-- ============ PRACTICE ============ -->
+<section class="tab" id="tab-prac">
+  <p class="lede">Original problems in the shape of the four practice midterm questions, plus PS2 to PS4, Shemer, Dickerson, Sheffer and GM. Solutions reveal one step at a time. Mark Solid, Shaky or Missed and it stays on this phone.</p>
+  <div class="row" id="modFilter"></div>
+  <p class="muted small" id="progSummary"></p>
+  <div id="probs"></div>
+  <div class="card">
+    <h2>How to work these for the exam</h2>
+    <ul class="plain small">
+      <li>Set up the accounting equation table first (columns: each balance sheet account, then a Rev/Exp column), post every transaction as a row, total it, then lift the statements off the totals. That is the PS3 solution layout and what he said you will do in Excel.</li>
+      <li>For any balance sheet account, EB = BB + increases − decreases. Three known pieces give you the fourth. Capex, collections, purchases and loan repayments all fall out of this.</li>
+      <li>Indirect CFO: NI, add back non-cash expenses, remove gains and add losses, then current operating assets with the sign flipped and current operating liabilities with the sign kept. His anchor: one credit sale you have not collected.</li>
+      <li>Proceeds from a PP&amp;E sale go to investing. The gain or loss gets pulled out of operating so it is not counted twice.</li>
+    </ul>
+  </div>
+</section>
+</div>
+
+
+<!-- ============ TRAPS ============ -->
+<section class="tab" id="tab-traps">
+  <p class="lede">The specific mistakes that lose points. The wrong move is crossed out, his framing is underneath.</p>
+  <div id="traps"></div>
+</section>
+
+<!-- ============ INTEL ============ -->
+<section class="tab" id="tab-intel">
+  <p class="lede">Everything he has said on the recordings about the midterm, dated by session. Paraphrased closely; the short quotes are his words.</p>
+  <div id="intel"></div>
+</section>
+
+<!-- ============ PLAN ============ -->
+<section class="tab" id="tab-plan">
+  <p class="lede">Oct 1 to Oct 19, built around PS4 (Oct 6), PS5 (Oct 15), the Friday review sessions and his own advice: one full practice midterm early, no cramming, sleep the night before. Tap a day to check it off.</p>
+  <div id="plan"></div>
+  <div class="card"><h2>Weekly anchors</h2><ul class="plain small">
+   <li>Tue and Thu 4:10, Kravis 420: class. Problem sets due before class starts, PDF only, 50% penalty if late and unexcused.</li>
+   <li>Fri 12:30 to 2:00, Geffen 420: TA review session, built around the problem sets. Fri 2 to 3, Kravis 680: TA office hours.</li>
+   <li>Tue 2:30 to 3:30, Kravis 521: Glover office hours.</li>
+  </ul></div>
+</section>
+
+<nav class="tabs" aria-label="Sections">
+  <button class="on" data-tab="scope" type="button"><span class="ic">◧</span>Scope</button>
+  <button data-tab="post" type="button"><span class="ic">⇄</span>Post it</button>
+  <button data-tab="treat" type="button"><span class="ic">⚖</span>Treatment</button>
+  <button data-tab="prac" type="button"><span class="ic">✎</span>Practice</button>
+  <button data-tab="traps" type="button"><span class="ic">⊘</span>Traps</button>
+  <button data-tab="intel" type="button"><span class="ic">◎</span>Intel</button>
+  <button data-tab="plan" type="button"><span class="ic">▤</span>Plan</button>
+</nav>
+
+<script>
+/* =========================================================
+   EXTENSION POINTS. Add to these arrays when new sessions,
+   problem sets or recordings are uploaded. Nothing else
+   needs to change.
+   ========================================================= */
+const SCOPE = [
+ {d:"Sep 1-2", t:"Introduction and overview", s:"EWHM M1. Four statements, articulation, GAAP vs IFRS. Feeds Q4, reading a 10-K.", st:"in"},
+ {d:"Sep 8-10", t:"The balance sheet", s:"EWHM M2. Elements, recognition, measurement at cost, classification.", st:"in"},
+ {d:"Sep 15", t:"The income statement", s:"Shemer case. Accrual vs cash income, revenue as 'the product of the company', gains vs revenue.", st:"in"},
+ {d:"Sep 17-22", t:"Basic procedures", s:"EWHM M3. Journal entries, adjusting entries, T-accounts. Feeds Q1, the 60-point transactions problem.", st:"in"},
+ {d:"Sep 24-29", t:"Cash flow statement", s:"EWHM M11. Dickerson case. Feeds Q2, the 40-point indirect-method problem.", st:"in"},
+ {d:"Oct 1", t:"Revenue recognition I", s:"EWHM M5. Five steps, Apple TV+ bundle, GM incentives (done 'in 10 minutes'), principal vs agent.", st:"in"},
+ {d:"Oct 6", t:"Revenue recognition II", s:"Tesla case. 'The case you really want to spend some time making sure you get down very carefully.' Feeds Q3.", st:"in"},
+ {d:"Oct 8", t:"Receivables", s:"After the cutoff. 'The cutoff is really revenue recognition' (Oct 1).", st:"out"},
+ {d:"Oct 13", t:"Inventory and cost accounting I", s:"After the cutoff. Not on the three practice midterms either.", st:"out"},
+ {d:"Oct 15", t:"Catch up and review", s:"He hopes to work a practice midterm of the class's choice. PS5 due.", st:"in"},
+ {d:"Oct 19", t:"Midterm", s:"Four questions, 200 points, on your laptop under Proctorio.", st:"cb"},
+];
+
+/* ---------- Post-it simulator ---------- */
+const OPEN = {
+  Cash:300, AR:50, Inv:80, Prepaid:20, PPE:200, AccDep:-10,
+  AP:40, WagesPay:0, Unearned:40, Loan:0, PIC:500, RE:60
+};
+const ACCT = {
+  Cash:{n:"Cash",side:"A",cur:true}, AR:{n:"Accounts receivable",side:"A",cur:true}, Inv:{n:"Inventory",side:"A",cur:true},
+  Prepaid:{n:"Prepaid rent",side:"A",cur:true}, PPE:{n:"PP&E (gross)",side:"A"}, AccDep:{n:"Accumulated depreciation",side:"A",contra:true},
+  AP:{n:"Accounts payable",side:"L",cur:true}, WagesPay:{n:"Wages payable",side:"L",cur:true}, Unearned:{n:"Advances from customers",side:"L",cur:true},
+  Loan:{n:"Loan payable",side:"L"}, PIC:{n:"Paid-in capital",side:"E"}, RE:{n:"Retained earnings",side:"E"},
+  // income statement accounts (temporary, flow into RE)
+  Sales:{n:"Sales revenue",side:"IS",sign:1}, COGS:{n:"Cost of goods sold",side:"IS",sign:-1}, DepExp:{n:"Depreciation expense",side:"IS",sign:-1},
+  RentExp:{n:"Rent expense",side:"IS",sign:-1}, WageExp:{n:"Wage expense",side:"IS",sign:-1}, IntExp:{n:"Interest expense",side:"IS",sign:-1},
+  Gain:{n:"Gain on disposal",side:"IS",sign:1}, Loss:{n:"Loss on disposal",side:"IS",sign:-1},
+  Div:{n:"Dividends",side:"DIV"}
+};
+// Each transaction returns lines: [acct, delta] where delta is the signed change to the account's natural balance
+// (for IS accounts delta is the amount of revenue/expense, positive). cash: {amt, cls} classifies cash movement for direct CFO.
+const TX = [
+ {id:"credsale", n:"Sell goods on credit", p1:"Selling price", p2:"Cost of goods", help:"Two entries at once: revenue and the matched COGS. The car dealer example: sold for 8,800 on credit, cost 8,000.",
+  f:(a,b)=>({lines:[["AR",a],["Sales",a],["Inv",-b],["COGS",b]]})},
+ {id:"cashsale", n:"Sell goods for cash", p1:"Selling price", p2:"Cost of goods", help:"Merchandise bought at 150 sold for 200 cash.",
+  f:(a,b)=>({lines:[["Cash",a],["Sales",a],["Inv",-b],["COGS",b]], cash:[{amt:a,cls:"O",lab:"Receipts from customers"}]})},
+ {id:"collect", n:"Collect a receivable", p1:"Amount", help:"No income effect. Cash up, AR down. Collection of a receivable of 200.",
+  f:(a)=>({lines:[["Cash",a],["AR",-a]], cash:[{amt:a,cls:"O",lab:"Receipts from customers"}]})},
+ {id:"buyinv", n:"Buy inventory on account", p1:"Amount", help:"Asset for a liability. Purchase of inventory for 100 on account.",
+  f:(a)=>({lines:[["Inv",a],["AP",a]]})},
+ {id:"payap", n:"Pay a supplier", p1:"Amount", help:"Settles the payable. Operating cash outflow.",
+  f:(a)=>({lines:[["Cash",-a],["AP",-a]], cash:[{amt:-a,cls:"O",lab:"Payments to suppliers"}]})},
+ {id:"prepay", n:"Pay rent in advance", p1:"Amount", help:"Cash becomes a prepaid asset. Consulting firm pays 900 on 11/29 for Dec through Feb.",
+  f:(a)=>({lines:[["Cash",-a],["Prepaid",a]], cash:[{amt:-a,cls:"O",lab:"Payments for rent"}]})},
+ {id:"expire", n:"Adjusting: prepaid rent expires", p1:"Amount used up", help:"Asset consumed becomes an expense. 300 of the 900 by 12/31. 'Assets are expenses waiting to happen.'",
+  f:(a)=>({lines:[["Prepaid",-a],["RentExp",a]]})},
+ {id:"dep", n:"Adjusting: record depreciation", p1:"Amount", help:"Contra asset grows, expense recorded, no cash. The classic add-back in the indirect method.",
+  f:(a)=>({lines:[["AccDep",-a],["DepExp",a]]})},
+ {id:"accruewage", n:"Adjusting: accrue wages", p1:"Amount", help:"Employees earned 2,200 in the last week of December, paid Jan 5.",
+  f:(a)=>({lines:[["WagesPay",a],["WageExp",a]]})},
+ {id:"paywage", n:"Pay wages in cash", p1:"Cash paid", p2:"Of which was already accrued", help:"Part extinguishes the payable, the rest is current-period expense. GIJoe: earned 48, paid 50.",
+  f:(a,b)=>({lines:[["Cash",-a],["WagesPay",-b],["WageExp",a-b]], cash:[{amt:-a,cls:"O",lab:"Payments to employees"}]})},
+ {id:"advance", n:"Receive a customer advance", p1:"Amount", help:"Cash now, obligation to deliver later. Not revenue yet.",
+  f:(a)=>({lines:[["Cash",a],["Unearned",a]], cash:[{amt:a,cls:"O",lab:"Receipts from customers"}]})},
+ {id:"earnadv", n:"Deliver on an advance", p1:"Selling price", p2:"Cost of goods", help:"GIJoe item 6: advance of 40, price 100, balance on credit. Liability drops by the advance already in the account.",
+  f:(a,b,st)=>{const adv=Math.min(st.Unearned,a);return {lines:[["Unearned",-adv],["AR",a-adv],["Sales",a],["Inv",-b],["COGS",b]]}}},
+ {id:"borrow", n:"Borrow from the bank", p1:"Amount", help:"Financing inflow. Principal only.",
+  f:(a)=>({lines:[["Cash",a],["Loan",a]], cash:[{amt:a,cls:"F",lab:"Proceeds from borrowing"}]})},
+ {id:"repay", n:"Repay loan principal", p1:"Amount", help:"Repayment of a loan of 3,000. Financing outflow, no income effect.",
+  f:(a)=>({lines:[["Cash",-a],["Loan",-a]], cash:[{amt:-a,cls:"F",lab:"Repayment of debt"}]})},
+ {id:"interest", n:"Pay interest in cash", p1:"Amount", help:"Interest paid is operating under US GAAP, which he called illogical. The principal is financing.",
+  f:(a)=>({lines:[["Cash",-a],["IntExp",a]], cash:[{amt:-a,cls:"O",lab:"Interest paid"}]})},
+ {id:"stock", n:"Issue common stock", p1:"Amount", help:"Owner contribution. Not revenue, ever. Issuance of stock for 2,000.",
+  f:(a)=>({lines:[["Cash",a],["PIC",a]], cash:[{amt:a,cls:"F",lab:"Proceeds from stock issue"}]})},
+ {id:"div", n:"Declare and pay a dividend", p1:"Amount", help:"Reduces retained earnings directly, never the income statement. Financing outflow.",
+  f:(a)=>({lines:[["Cash",-a],["Div",a]], cash:[{amt:-a,cls:"F",lab:"Dividends paid"}]})},
+ {id:"buyppe", n:"Buy equipment for cash", p1:"Cost", help:"Capex. Investing outflow. The number you back out from the PP&E account on the Dickerson-style problem.",
+  f:(a)=>({lines:[["Cash",-a],["PPE",a]], cash:[{amt:-a,cls:"I",lab:"Purchase of PP&E"}]})},
+ {id:"sellppe", n:"Sell equipment for cash", p1:"Cash received", p2:"Book value removed (cost less its accumulated depreciation)", help:"Truck carried at 5,600 sold for 5,900: gain 300. Grocery truck at 2,400 sold for 2,300: loss 100. Proceeds go to investing; the gain or loss is removed from operating so it is not counted twice.",
+  f:(a,b)=>{const gl=a-b;const lines=[["Cash",a],["PPE",-b]];if(gl>0)lines.push(["Gain",gl]);else if(gl<0)lines.push(["Loss",-gl]);return {lines,cash:[{amt:a,cls:"I",lab:"Proceeds from PP&E sale"}]}}},
+ {id:"loanout", n:"Lend cash to another company", p1:"Amount", help:"DEF lent 50 to its sister company ABC on the last day of the year. Investing outflow, not operating.",
+  f:(a)=>({lines:[["Cash",-a],["LoanOut",a]], cash:[{amt:-a,cls:"I",lab:"Loan made to affiliate"}]})},
+];
+ACCT.LoanOut={n:"Loan receivable (ABC)",side:"A"};
+OPEN.LoanOut=0;
+
+const $=id=>document.getElementById(id);
+const txSel=$("txSel"),p1=$("p1"),p2=$("p2"),p1wrap=$("p1wrap"),p2wrap=$("p2wrap"),txHelp=$("txHelp"),postBtn=$("postBtn"),undoBtn=$("undoBtn"),resetBtn=$("resetBtn"),drcrBtn=$("drcrBtn"),eqbar=$("eqbar"),jeBox=$("jeBox"),stmts=$("stmts"),log=$("log");
+let state, journal, drcr=false;
+function reset(){state={...OPEN};journal=[];Object.keys(ACCT).forEach(k=>{if(ACCT[k].side==="IS"||ACCT[k].side==="DIV")state[k]=0});render(null);}
+function post(){
+  const tx=TX.find(t=>t.id===txSel.value);
+  const a=Number(p1.value)||0, b=Number(p2.value)||0;
+  const r=tx.f(a,b,state);
+  // validations
+  for(const [k,d] of r.lines){ if(ACCT[k].side==="A"&&!ACCT[k].contra&&state[k]+d<0){alert(`${ACCT[k].n} would go negative (${state[k]+d}). Lower the amount.`);return;}
+    if(ACCT[k].side==="L"&&state[k]+d<0){alert(`${ACCT[k].n} would go negative. You cannot pay down more than you owe.`);return;} }
+  const snap={...state};
+  for(const [k,d] of r.lines) state[k]+=d;
+  journal.push({tx,a,b,lines:r.lines,cash:r.cash||[],snap});
+  render(r.lines.map(l=>l[0]));
+}
+function undo(){const j=journal.pop();if(!j)return;state=j.snap;render(null);}
+function fmt(v){const s=Math.abs(v).toLocaleString();return v<0?`(${s})`:s}
+function ni(){let n=0;for(const k in ACCT){if(ACCT[k].side==="IS")n+=ACCT[k].sign*state[k]}return n}
+function totals(){
+  let A=0,L=0,E=0;
+  for(const k in ACCT){const m=ACCT[k];if(m.side==="A")A+=state[k];else if(m.side==="L")L+=state[k];else if(m.side==="E")E+=state[k]}
+  E+=ni()-state.Div;
+  return {A,L,E};
+}
+function render(hits){
+  hits=hits||[];
+  const {A,L,E}=totals();
+  const ok=Math.abs(A-(L+E))<0.001;
+  eqbar.innerHTML=`<div><div class="k">Assets</div><div class="v">${fmt(A)}</div></div><div class="op">=</div>
+   <div><div class="k">Liabilities</div><div class="v">${fmt(L)}</div></div><div class="op">+</div>
+   <div><div class="k">Equity (incl. this period's NI − div)</div><div class="v">${fmt(E)}</div></div>
+   <div class="ok ${ok?"":"bad"}">${ok?"✓ Balanced. ΔA = ΔL + ΔE held on every posting.":"✗ Out of balance"}</div>`;
+  // JE box
+  const j=journal[journal.length-1];
+  if(!j){jeBox.innerHTML=`<span class="muted">Nothing posted yet. Pick a transaction and post it.</span>`}
+  else{
+    const grp={A:[],L:[],E:[]};
+    j.lines.forEach(([k,d])=>{const m=ACCT[k];let side=m.side;let shown=d;let label=m.n;
+      if(side==="IS"){side="E";shown=m.sign*d;label=m.n+(m.sign>0?" (revenue ↑ equity)":" (expense ↓ equity)")}
+      if(side==="DIV"){side="E";shown=-d;label="Dividends (↓ retained earnings)"}
+      if(m.contra){label=m.n+" (contra)"}
+      grp[side].push(`<span>${label}</span><span class="n ${shown<0?"neg":""}">${fmt(shown)}</span>`)});
+    let eq=`<div class="lines"><span class="muted" style="grid-column:1/-1">Assets</span>${grp.A.join("")||"<span class='muted'>none</span><span></span>"}
+      <span class="muted" style="grid-column:1/-1">= Liabilities</span>${grp.L.join("")||"<span class='muted'>none</span><span></span>"}
+      <span class="muted" style="grid-column:1/-1">+ Owners' equity</span>${grp.E.join("")||"<span class='muted'>none</span><span></span>"}</div>`;
+    let dc="";
+    if(drcr){const dr=[],cr=[];j.lines.forEach(([k,d])=>{const m=ACCT[k];const nat=(m.side==="A"&&!m.contra)||(m.side==="IS"&&m.sign<0)||m.side==="DIV"?1:-1; // debit-natural
+      const isDebit=(nat===1&&d>0)||(nat===-1&&d<0);const amt=Math.abs(d);(isDebit?dr:cr).push(`<span class="${isDebit?"":"cr"}">${isDebit?"DR":"CR"} ${m.n}</span><span class="n">${amt.toLocaleString()}</span>`)});
+      dc=`<div class="lines" style="margin-top:8px;border-top:1px dashed var(--line);padding-top:6px">${dr.join("")}${cr.join("")}</div>`}
+    jeBox.innerHTML=`<div class="row" style="justify-content:space-between"><b>Entry ${journal.length}: ${j.tx.n}</b><span class="muted">${j.a.toLocaleString()}${j.tx.p2?" / "+j.b.toLocaleString():""}</span></div>${eq}${dc}`;
+  }
+  // statements
+  const n=ni();
+  const bsLines=(keys)=>keys.filter(k=>state[k]!==0||OPEN[k]!==0||hits.includes(k)).map(k=>`<div class="ln ${hits.includes(k)?"hit":""} ind"><span>${ACCT[k].n}</span><span class="${state[k]<0?"neg":""}">${fmt(state[k])}</span></div>`).join("");
+  const RE=state.RE+n-state.Div;
+  const bs=`<div class="stmt"><h3>Balance sheet <span>as of now</span></h3>
+    <div class="ln hd"><span>Assets</span><span></span></div>${bsLines(["Cash","AR","Inv","Prepaid","LoanOut","PPE","AccDep"])}
+    <div class="ln tot"><span>Total assets</span><span>${fmt(A)}</span></div>
+    <div class="ln hd"><span>Liabilities</span><span></span></div>${bsLines(["AP","WagesPay","Unearned","Loan"])}
+    <div class="ln hd"><span>Owners' equity</span><span></span></div>${bsLines(["PIC"])}
+    <div class="ln ind ${hits.some(h=>ACCT[h].side==="IS"||h==="Div")?"hit":""}"><span>Retained earnings</span><span>${fmt(RE)}</span></div>
+    <div class="ln tot"><span>Total L + E</span><span>${fmt(L+E)}</span></div></div>`;
+  const isKeys=Object.keys(ACCT).filter(k=>ACCT[k].side==="IS");
+  const isLines=isKeys.filter(k=>state[k]!==0||hits.includes(k)).map(k=>`<div class="ln ${hits.includes(k)?"hit":""} ind"><span>${ACCT[k].n}</span><span class="${ACCT[k].sign<0?"neg":""}">${fmt(ACCT[k].sign*state[k])}</span></div>`).join("")||`<div class="ln muted"><span>No income statement activity yet</span><span></span></div>`;
+  const is=`<div class="stmt"><h3>Income statement <span>period to date</span></h3>${isLines}
+    <div class="ln tot"><span>Net income</span><span class="${n<0?"neg":""}">${fmt(n)}</span></div>
+    <div class="ln hd"><span>Retained earnings roll</span><span></span></div>
+    <div class="ln ind"><span>Beginning RE</span><span>${fmt(state.RE)}</span></div>
+    <div class="ln ind"><span>+ Net income</span><span>${fmt(n)}</span></div>
+    <div class="ln ind ${hits.includes("Div")?"hit":""}"><span>− Dividends</span><span>${fmt(-state.Div)}</span></div>
+    <div class="ln tot"><span>Ending RE</span><span>${fmt(RE)}</span></div></div>`;
+  // CFS indirect
+  const d=k=>state[k]-OPEN[k];
+  const op=[["Net income",n],["+ Depreciation (non-cash)",state.DepExp],["− Gain on disposal",-state.Gain],["+ Loss on disposal",state.Loss],
+    ["− Increase in A/R",-d("AR")],["− Increase in inventory",-d("Inv")],["− Increase in prepaid rent",-d("Prepaid")],
+    ["+ Increase in A/P",d("AP")],["+ Increase in wages payable",d("WagesPay")],["+ Increase in customer advances",d("Unearned")]];
+  const cfo=op.reduce((s,x)=>s+x[1],0);
+  const inv=[["Purchase of PP&E",-(Math.max(0,d("PPE")+journal.reduce((s,j)=>s+j.lines.filter(l=>l[0]==="PPE"&&l[1]<0).reduce((t,l)=>t-l[1],0),0)))],
+             ["Proceeds from PP&E sale",journal.reduce((s,j)=>s+j.cash.filter(c=>c.lab==="Proceeds from PP&E sale").reduce((t,c)=>t+c.amt,0),0)],
+             ["Loan made to affiliate",-d("LoanOut")]];
+  const cfi=inv.reduce((s,x)=>s+x[1],0);
+  const fin=[["Net borrowing (repayment)",d("Loan")],["Stock issued",d("PIC")],["Dividends paid",-state.Div]];
+  const cff=fin.reduce((s,x)=>s+x[1],0);
+  const direct={};journal.forEach(j=>j.cash.forEach(c=>{if(c.cls==="O")direct[c.lab]=(direct[c.lab]||0)+c.amt}));
+  const dcfo=Object.values(direct).reduce((s,v)=>s+v,0);
+  const tie=Math.abs(dcfo-cfo)<0.001;
+  const row=(x,hit)=>x[1]!==0?`<div class="ln ind ${hit?"hit":""}"><span>${x[0]}</span><span class="${x[1]<0?"neg":""}">${fmt(x[1])}</span></div>`:"";
+  const touchedCash=hits.includes("Cash");
+  const cfs=`<div class="stmt"><h3>Cash flow statement <span>indirect</span></h3>
+    <div class="ln hd"><span>Operating</span><span></span></div>${op.map((x,i)=>row(x,touchedCash||hits.some(h=>ACCT[h].side==="IS")&&i===0)).join("")}
+    <div class="ln tot"><span>Cash from operations</span><span class="${cfo<0?"neg":""}">${fmt(cfo)}</span></div>
+    <div class="ln hd"><span>Investing</span><span></span></div>${inv.map(x=>row(x,false)).join("")}
+    <div class="ln tot"><span>Cash from investing</span><span class="${cfi<0?"neg":""}">${fmt(cfi)}</span></div>
+    <div class="ln hd"><span>Financing</span><span></span></div>${fin.map(x=>row(x,false)).join("")}
+    <div class="ln tot"><span>Cash from financing</span><span class="${cff<0?"neg":""}">${fmt(cff)}</span></div>
+    <div class="ln tot"><span>Change in cash</span><span class="${(cfo+cfi+cff)<0?"neg":""}">${fmt(cfo+cfi+cff)}</span></div>
+    <div class="ln ind"><span>Beginning cash ${fmt(OPEN.Cash)} → ending</span><span class="${touchedCash?"hit":""}">${fmt(state.Cash)}</span></div>
+    <div class="ln hd"><span>Direct-method check</span><span></span></div>
+    ${Object.entries(direct).map(([k,v])=>`<div class="ln ind"><span>${k}</span><span class="${v<0?"neg":""}">${fmt(v)}</span></div>`).join("")||`<div class="ln ind muted"><span>No operating cash yet</span><span></span></div>`}
+    <div class="ln tot"><span>Direct CFO</span><span class="${tie?"pos":"neg"}">${fmt(dcfo)} ${tie?"✓ ties":"✗"}</span></div></div>`;
+  stmts.innerHTML=bs+is+cfs;
+  // log
+  log.innerHTML=journal.length?journal.map((j,i)=>`<div><span>${i+1}. ${j.tx.n}</span><span class="muted">${j.a.toLocaleString()}${j.tx.p2?" / "+j.b.toLocaleString():""}</span></div>`).reverse().join(""):`<span class="muted">Empty.</span>`;
+  undoBtn.disabled=!journal.length;
+}
+TX.forEach(t=>{const o=document.createElement("option");o.value=t.id;o.textContent=t.n;txSel.appendChild(o)});
+function syncTx(){const t=TX.find(x=>x.id===txSel.value);p1wrap.firstChild.textContent=t.p1+" ";p2wrap.style.display=t.p2?"flex":"none";if(t.p2)p2wrap.firstChild.textContent=t.p2+" ";txHelp.textContent=t.help;}
+txSel.addEventListener("change",syncTx);syncTx();
+postBtn.onclick=post;undoBtn.onclick=undo;resetBtn.onclick=reset;drcrBtn.onclick=()=>{drcr=!drcr;drcrBtn.textContent=drcr?"Hide DR/CR":"Show DR/CR";render(null)};
+reset();
+
+/* ---------- Treatment chooser ---------- */
+const TREAT=[
+ {id:"credsale",n:"Sale on credit",c:"revenue + matched COGS",
+  eq:"A/R +P | Sales revenue +P (equity ↑)\nInventory −C | COGS −C (equity ↓)",
+  bs:"A/R up by price; inventory down by cost. Net assets up by the margin.", is:"Revenue P, COGS C, gross profit P − C.", cfs:"No cash. In the indirect method the increase in A/R is subtracted from NI.",
+  ex:"Car dealer sells a car bought for 8,000 for 8,800 on credit (Sep 22 slides). His anchor for the cash flow statement on Sep 24 and 29: 'a credit sale, you haven't received the cash yet... so you've got to subtract the increase in accounts receivable.'",
+  trap:"Recognize revenue when earned and realizable, not when collected. Forgetting the COGS half is the common PS3 error."},
+ {id:"cashsale",n:"Sale for cash",c:"same income, different CFS",
+  eq:"Cash +P | Sales +P\nInventory −C | COGS −C",
+  bs:"Cash up by price, inventory down by cost.", is:"Identical to a credit sale.", cfs:"Operating inflow of P (receipts from customers).",
+  ex:"Merchandise purchased at 150 sold for 200 in cash (Sep 22). The accrual vs cash exercise on Sep 15: 100 of inventory, half sold for 200 with 100 cash and 100 on credit, year 1 cash inflow 0 versus accrual income 150.",
+  trap:"Cash sales and credit sales produce the same income statement. Only the cash flow statement separates them."},
+ {id:"collect",n:"Collect a receivable",c:"no income effect",
+  eq:"Cash +X\nA/R −X",
+  bs:"One asset for another. Totals unchanged.", is:"Nothing. Revenue was recognized at the sale.", cfs:"Operating inflow. Collections = BB A/R + credit sales − EB A/R.",
+  ex:"Collection of a receivable of 200 (Sep 22). Company A: A/R 100 to 150, sales 900, so collections 850 (Sep 24).",
+  trap:"Students sometimes record revenue again on collection. Shemer collects every month and still runs out of cash because collections lag sales."},
+ {id:"buyinv",n:"Purchase inventory",c:"on account or for cash",
+  eq:"Inventory +X | A/P +X   (on account)\nInventory +X, Cash −X   (for cash)",
+  bs:"Asset up. Either a liability up or cash down.", is:"Nothing until sold. COGS = BB inventory + purchases − EB inventory.", cfs:"On account: nothing now; the increase in A/P is added back under indirect. For cash: operating outflow.",
+  ex:"Purchase of inventory for 100 in cash and for 100 on account, the first two entries of the Sep 22 exercise. DEF bought 375 on account and paid 365 (PS3).",
+  trap:"Inventory is an asset at cost. Buying it is never an expense. He said inventory going up 'takes cash' in the indirect method, and that is why it is subtracted."},
+ {id:"prepay",n:"Prepayment (rent, insurance)",c:"asset first, expense later",
+  eq:"Cash −X | Prepaid +X   (on payment)\nPrepaid −used | Expense −used (equity ↓)   (adjusting)",
+  bs:"Cash to prepaid, then prepaid shrinks each period.", is:"Expense only for the portion used. Time-apportion by months.", cfs:"Operating outflow when paid. Later expense is non-cash, so the decrease in prepaid is added back.",
+  ex:"900 paid 11/29 for Dec through Feb: 300 expense at 12/31 (Sep 22). 3,000 fire insurance for Jul through Jun: 1,500 expensed at year end. GIJoe item 3: 36 for 18 months from Jan 1, so 24 expense and 12 prepaid at Dec 31 (PS4).",
+  trap:"The law firm that expensed a full year of rent in one year on Sep 8: 'it's not matching.' Count months carefully."},
+ {id:"dep",n:"Depreciation",c:"adjusting entry, contra asset",
+  eq:"Accumulated depreciation −X (asset side, contra)\nDepreciation expense −X (equity ↓)",
+  bs:"PP&E gross unchanged; accumulated depreciation grows; net PP&E falls.", is:"Depreciation expense.", cfs:"No cash. Added back to NI in the indirect method. Sign that the cash flow problem gives you 'depreciation expense for the year'.",
+  ex:"DEF: depreciation 20, accumulated depreciation 10 to 30 (PS3). Dickerson: 510 on buildings and machinery. He called it the classic non-cash expense on Sep 29, along with stock comp, amortization and impairments.",
+  trap:"Accumulated depreciation is not a liability. He flagged this when a student asked on Sep 8. Report PP&E net or show the contra line under PP&E."},
+ {id:"accrue",n:"Accrued expense (wages, interest)",c:"incurred, not yet paid",
+  eq:"Wages payable +X (liability)\nWage expense −X (equity ↓)",
+  bs:"Liability up. Nothing happens to cash.", is:"Expense in the period the work was done.", cfs:"Non-cash now. The increase in the payable is added back. When paid later, the payable goes down and cash goes down.",
+  ex:"2,200 earned in the last week of December, payroll Jan 5 (Sep 22). Note of 1,000 at 12% issued 10/31: interest 20 accrued at 12/31. DEF: employee earned 48, owed 6 at year end, so 42 cash (PS3).",
+  trap:"Wage expense is what was earned, not what was paid. GIJoe earned 48 but paid 50 because 8 was owed from last year: the payable falls to 6... check it with EB = BB + earned − paid."},
+ {id:"advance",n:"Customer advance / unearned revenue",c:"cash now, revenue later",
+  eq:"Cash +X | Advances from customers +X   (receipt)\nAdvances −X, A/R +(P−X) | Sales +P   (delivery)",
+  bs:"Liability until delivered. On delivery the liability is extinguished and any balance is a receivable.", is:"Revenue only on delivery, for the full price.", cfs:"Operating inflow on receipt. On delivery, no cash; the decrease in the liability is subtracted from NI.",
+  ex:"Sep 8: a gym collects fees up front, 'you'll increase cash and you'll increase unearned revenue, which is a liability.' GIJoe item 6: 40 advance, 100 price, 60 to be paid in 2024.",
+  trap:"The advance is not revenue. It is the single most common misread in the PS4 GIJoe problem."},
+ {id:"borrow",n:"Borrow / repay / pay interest",c:"financing vs operating",
+  eq:"Cash +X | Loan payable +X   (borrow)\nCash −X | Loan payable −X   (repay principal)\nCash −I | Interest expense −I   (interest)",
+  bs:"Loan is a liability. Interest paid lowers equity.", is:"Only interest hits the income statement.", cfs:"Principal is financing. Interest paid is operating under US GAAP ('illogically', his word).",
+  ex:"Repayment of a loan of 3,000 (Sep 22). Dickerson retired bonds at book value: 1,984 to 1,934 means 50 financing outflow. ABC paid GIJoe 5 interest and 15 principal: 5 is revenue, 15 reduces the loan receivable (PS4).",
+  trap:"Do not put interest in financing on a US GAAP exam. Do not put principal in operating."},
+ {id:"stock",n:"Issue stock / pay dividends",c:"owner transactions",
+  eq:"Cash +X | Paid-in capital +X   (issue)\nCash −D | Retained earnings −D   (dividend paid)",
+  bs:"Both move equity directly.", is:"Neither touches the income statement. Owner contributions are never revenue; dividends are never an expense.", cfs:"Both financing.",
+  ex:"Issuance of common stock for 2,000 (Sep 22). Dividends of 400 declared but not yet paid create a dividends payable. Mrs. GIJoe's lottery win is not a company transaction at all: accounting entity assumption (PS4 item 13).",
+  trap:"Dividends reduce RE in the retained earnings roll, below net income. Ending RE = beginning RE + NI − dividends."},
+ {id:"sellppe",n:"Sell PP&E (gain or loss)",c:"the double-count trap",
+  eq:"Cash +proceeds\nPP&E −cost, Accumulated dep. +cost's AD (contra reverses)\nGain +(proceeds − BV) or Loss −(BV − proceeds)",
+  bs:"Remove gross cost and its accumulated depreciation. Book value = cost − AD.", is:"Gain or loss, shown as incidental, not revenue.", cfs:"Full proceeds in investing. Remove the gain (or add back the loss) in operating so it is not counted twice.",
+  ex:"Construction truck carried at 5,600 sold for 5,900: gain 300 (Sep 22). Grocery truck carried at 2,400 sold for 2,300: loss 100 (Sep 15). Dickerson: machinery cost 150, AD 120, sold for 25, loss 5; add 5 back in operating, 25 in investing. Six Flags selling an amusement park is a gain, not revenue (Sep 15).",
+  trap:"Back out capex from the PP&E account: EB = BB + purchases − cost of disposals. Dickerson: 9,546 = 8,678 + X − 150, so X = 1,018."},
+ {id:"capex",n:"Buy PP&E",c:"capitalize, then depreciate",
+  eq:"Cash −X\nPP&E +X",
+  bs:"One asset for another.", is:"Nothing now. Depreciation spreads the cost over the useful life.", cfs:"Investing outflow.",
+  ex:"Dickerson purchased land (594 to 630, so 36) and buildings and machinery. On Sep 29 he said you will be given balance sheet numbers and must 'work backwards' to capex, 'and that you need to know for the midterm.'",
+  trap:"Land is not depreciated. If the problem says 'all PP&E sold was fully depreciated' (A Cruel World, PS4), book value is zero and proceeds equal the gain."},
+ {id:"loanout",n:"Lend to another company",c:"investing, not operating",
+  eq:"Cash −X\nLoan receivable +X",
+  bs:"Asset for asset.", is:"Nothing. Interest received later is revenue.", cfs:"Investing outflow. Repayment of principal is an investing inflow; interest received is operating.",
+  ex:"DEF gave a loan of 50 to its twin sister company ABC on the last day of the year (PS3). GIJoe received 15 principal and 5 interest the next year (PS4).",
+  trap:"Students put this in operating because it is a 'current' transaction. It is a non-operating asset; follow the left-hand-side rule for investing."},
+ {id:"close",n:"Closing entries",c:"not on the exam, but know the roll",
+  eq:"Sales revenue −total, COGS +total, other expenses +total → Retained earnings +NI\nDividends +total → Retained earnings −dividends",
+  bs:"Temporary accounts go to zero; RE absorbs NI and dividends.", is:"The income statement is the summary of what was closed.", cfs:"None.",
+  ex:"Firm X: sales 2,700, cost of sales 2,200, dividends 300, so RE up 500 then down 300 (Sep 22). On Sep 24: 'typically on the exams I think we don't have you do the closing entries.'",
+  trap:"On the exam, keep one column that is the income statement and the retained earnings movement together. Ending RE = beginning RE + NI − dividends."},
+
+ {id:"bundle",n:"Bundle with several performance obligations",c:"five steps, relative SSP",
+  eq:"At sale: Cash +P = Sales revenue +(point-in-time pieces) + Deferred revenue +(over-time pieces)\nEach period: Deferred revenue −X = Sales revenue +X",
+  bs:"Deferred revenue (a liability) for every obligation not yet satisfied.", is:"Point-in-time pieces at delivery; over-time pieces by months elapsed or by usage.", cfs:"All cash at sale is operating. The deferred revenue increase is added back under indirect.",
+  ex:"Apple: iPhone plus one year of Apple TV+ for $1,000, standalone $900 and $200, so 818.18 and 181.82 (Oct 1). Tesla: $35,000 for a Model 3 (32,000), 10,000 Supercharging miles (0.08/mile), a year of FSD (200/month), 4 years of warranty (100/month); allocated 28,000 / 700 / 2,100 / 4,200. Supercharging is recognized on 833 miles a month, not the calendar.",
+  trap:"Step 5 is what gets graded ('intermediate steps do not have to be shown for full credit'). Allocate the discount across every obligation by relative SSP, and check the allocations sum to the price."},
+ {id:"incent",n:"Incentives, rebates, expected returns",c:"reduce revenue, not an expense",
+  eq:"At sale: A/R or Cash +gross = Sales revenue +gross; Sales revenue − incentives (contra) −expected = Incentive liability +expected\nWhen paid: Incentive liability −paid, Cash −paid",
+  bs:"A liability for the expected incentive. Differences between estimate and actual go through sales revenue later.", is:"Net sales. The incentive is contra-revenue in the year of the sale (matching).", cfs:"Cash out when the rebate is paid; the liability increase is added back in the year it is accrued.",
+  ex:"GM: 1,000 cars to dealers on 12/15/2023 at $25,000, cost $21,000. 60% of buyers wait for a $5,000 incentive, so revenue is 25M − 3M = 22M and income is 1M in 2023, 0 in 2024. Cash basis would show 4M then −3M (Oct 1).",
+  trap:"Recording the incentive as a 2024 marketing expense. He framed the whole case as whether the incentive is a price cut or a cost."},
+ {id:"agent",n:"Principal vs agent",c:"gross or net revenue",
+  eq:"Principal: Cash +100 = Sales revenue +100; Inventory −80 = COGS −80\nAgent: Cash +20 = Sales revenue +20",
+  bs:"No difference in net assets.", is:"Same gross profit either way. Revenue is 100 as principal, 20 as agent.", cfs:"Same.",
+  ex:"Priceline Name Your Own Price: $100 ticket, airline supplies it at $80. Groupon restated revenue from gross to net in 2011. Enron used gross revenue to climb to number 7 on the Fortune 500 (Oct 1). Costco is principal for most sales (PS5).",
+  trap:"Principal means you control the good before the customer gets it. Arranging for someone else to provide it is agent, net."},
+ {id:"loyalty",n:"Loyalty points, memberships, gift cards",c:"defer, then recognize",
+  eq:"Points: Cash +1,000 = Sales revenue +750 + Deferred revenue +250\nMembership or gift card: Cash +X = Deferred revenue +X; later Deferred revenue −X = Revenue +X",
+  bs:"Deferred revenue or gift card liability until redeemed or until the period passes.", is:"Revenue on redemption, or ratably over the membership year.", cfs:"Operating inflow when cash arrives.",
+  ex:"Frequent flyer: $1,000 ticket earns 1/3 of a free flight worth $333, so 750 revenue and 250 deferred per paid flight (Oct 1 appendix). Chipotle gift cards recorded as unearned revenue, $238,577 thousand (2025 midterm Q4). Costco's $2,646M of membership fees, recognized over 12 months (PS5).",
+  trap:"Gift cards are never revenue at sale. Breakage (cards never used) is estimated and recognized based on redemption data."},
+ {id:"rd",n:"R&D, advertising",c:"expense as incurred",
+  eq:"Cash −X = R&D expense −X (equity ↓)",
+  bs:"Nothing capitalized.", is:"Expense now, even when the project might pay off later.", cfs:"Operating outflow.",
+  ex:"'Spent $50 in cash on general research and development. The success of the project will be determined next year' (2023 Q1). Same item in 2024 Q1 for $40,000. The Oct 1 slides: if there is no way to be certain of the amount and timing of the benefit, expense it.",
+  trap:"Capitalizing it because the success is unknown. Uncertainty is exactly why it is expensed."},
+ {id:"personal",n:"The owner's or CEO's personal money",c:"no entry",
+  eq:"No entry.",
+  bs:"Nothing.", is:"Nothing.", cfs:"Nothing.",
+  ex:"Mrs. GIJoe's $77,784 lottery win (PS4). The CEO's $12,000 on his personal stocks (2025 Q1). KLM's CEO announcing her resignation (PS5).",
+  trap:"Every Q1 has one item that is not a transaction. Write 'no entry, accounting entity assumption' and move on."},
+ {id:"sbc",n:"Stock-based compensation",c:"non-cash, credited to common stock",
+  eq:"Common stock +X = Compensation expense −X (both in equity, net zero to equity)",
+  bs:"Common stock up; retained earnings down through the expense.", is:"Expense.", cfs:"Added back in operating. When backing out stock issued for cash, subtract it from the common stock change.",
+  ex:"Shake Shack 6,000 (2023), Beet's 10,000 (2024), Dairy Co. 3,000 (2025). Glover listed it with depreciation as a classic non-cash item on Sep 29.",
+  trap:"Putting the whole change in common stock in financing. Only the cash issuance goes there."},
+ {id:"bondret",n:"Retire bonds early",c:"gain or loss out of operating",
+  eq:"Bonds payable −book, Cash −paid; difference to Gain (+) or Loss (−) on retirement",
+  bs:"Liability removed at book value.", is:"Gain if you paid less than book, loss if more.", cfs:"All cash paid is financing. Gain subtracted, loss added back in operating.",
+  ex:"Dairy Co. retired 50,000 of bonds for 55,000: loss 5,000 added back, 55,000 financing outflow (2025 Q2). Dickerson retired bonds at book value, no gain.",
+  trap:"Same double-count logic as the PP&E sale. Students get it right for equipment and miss it for bonds."},
+ {id:"treasury",n:"Buy back stock (treasury stock)",c:"contra equity, financing",
+  eq:"Cash −X = Treasury stock −X (equity ↓)",
+  bs:"Treasury stock is negative equity.", is:"Nothing.", cfs:"Financing outflow.",
+  ex:"Shake Shack (5,000) and Beet's (52,000) on the 2023 and 2024 midterms.",
+  trap:"It is not an asset, and it never touches the income statement."},
+ {id:"baddebt",n:"Bad debt provision / write-off",c:"Oct 8, after the cutoff",
+  eq:"Taught Oct 8, after the midterm cutoff. Preview from his Sep 1 and Sep 2 remarks: estimate bad debt expense up front at the time of sale (matching), build an allowance that nets against A/R as a contra asset. A write-off later hits the allowance, not the income statement.",
+  bs:"A/R shown net of the allowance (a contra asset, not a liability).", is:"Bad debt expense in the period of the sale.", cfs:"Non-cash; added back under indirect.",
+  ex:"Sep 2: Canon shows a separate 'allowance for credit losses' line, unusual relative to US presentation where A/R is shown net.",
+  trap:"Not on the midterm per the Oct 1 cutoff. Kept here for the final."},
+];
+const chooser=document.getElementById("chooser"),treatOut=document.getElementById("treatOut");
+TREAT.forEach(t=>{const b=document.createElement("button");b.type="button";b.innerHTML=`${t.n}<span class="c">${t.c}</span>`;b.onclick=()=>showTreat(t.id,b);chooser.appendChild(b)});
+function showTreat(id,btn){
+  chooser.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===btn));
+  const t=TREAT.find(x=>x.id===id);
+  treatOut.innerHTML=`<div class="card"><h2>${t.n}</h2>
+    <h3>Entry (balance sheet equation form)</h3><pre>${t.eq}</pre>
+    <div class="effects"><div class="e"><b>Balance sheet</b>${t.bs}</div><div class="e"><b>Income statement</b>${t.is}</div><div class="e"><b>Cash flow statement</b>${t.cfs}</div></div>
+    <h3>What he used in class</h3><p class="small">${t.ex}</p>
+    <h3>Trap</h3><p class="small">${t.trap}</p></div>`;
+  treatOut.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+/* ---------- Practice problems ---------- */
+const MODULES=["All","Basic procedures (M3)","Cash flow (M11)","Revenue recognition (M5)","Reading a 10-K","Statements & 10-K (M1-M2)","Income statement"];
+const PROBS=[
+{id:"p1",mod:"Basic procedures (M3)",title:"Hudson Yards Coffee Co.",style:"PS3 / PS4 shape. Practice midterm problem 1.",tag:"in",
+ body:`<p>Hudson Yards Coffee Co. started operations in 2024. Its balance sheet at December 31, 2025 showed these balances and no others:</p>
+ <p class="small"><i>Cash 180, Accounts receivable 60, Inventory 90, Prepaid insurance 12, Equipment (gross) 300, Accumulated depreciation 45, Accounts payable 55, Wages payable 8, Customer deposits 30, Note payable 100, Paid-in capital 300, Retained earnings (?).</i></p>
+ <p>During 2026:</p>
+ <ol class="plain small">
+ <li>Purchased 410 of inventory on account.</li>
+ <li>Paid suppliers 395.</li>
+ <li>Sales were 700, of which 420 were for cash and 280 on credit.</li>
+ <li>In addition, the company delivered the goods for the customer who had paid a 30 deposit at the end of 2025. The selling price was 45; the remaining 15 will be paid in 2027.</li>
+ <li>Ending inventory was 95.</li>
+ <li>Collections from credit customers were 265.</li>
+ <li>The 12 of prepaid insurance covered a policy that expired June 30, 2026. On July 1, 2026 the company paid 24 in cash for a new 12-month policy.</li>
+ <li>Depreciation expense was 30.</li>
+ <li>Employees earned 96 of wages. Cash paid to employees was 100.</li>
+ <li>On December 31 the company paid interest of 6 on the note (6% on 100) and repaid 20 of principal.</li>
+ <li>Sold an espresso machine that had cost 40 and had accumulated depreciation of 25, for 22 in cash.</li>
+ <li>Bought new equipment for 60 in cash.</li>
+ <li>Declared and paid a dividend of 15.</li>
+ </ol>
+ <p><b>Required.</b> (a) Retained earnings at December 31, 2025. (b) Record the 2026 entries using the accounting equation. (c) Income statement for 2026. (d) Balance sheet at December 31, 2026. (e) Statement of cash flows for 2026, indirect method, with the direct-method operating section as a check.</p>`,
+ steps:[
+ {h:"(a) Plug retained earnings",b:`Assets 180 + 60 + 90 + 12 + 300 − 45 = 597. Liabilities 55 + 8 + 30 + 100 = 193. Equity 404, so RE = 404 − 300 = <b>104</b>.`},
+ {h:"(b) Post the entries and total each column",b:`<div class="scroll"><table><tr><th>Account</th><th class="n">BB</th><th>Movements</th><th class="n">EB</th></tr>
+ <tr><td>Cash</td><td class="n">180</td><td>−395 +420 +265 −24 −100 −6 −20 +22 −60 −15</td><td class="n">267</td></tr>
+ <tr><td>A/R</td><td class="n">60</td><td>+280 +15 −265</td><td class="n">90</td></tr>
+ <tr><td>Inventory</td><td class="n">90</td><td>+410 −405 (COGS = 90 + 410 − 95)</td><td class="n">95</td></tr>
+ <tr><td>Prepaid insurance</td><td class="n">12</td><td>−12 +24 −12</td><td class="n">12</td></tr>
+ <tr><td>Equipment</td><td class="n">300</td><td>−40 +60</td><td class="n">320</td></tr>
+ <tr><td>Accumulated dep.</td><td class="n">(45)</td><td>−30 +25</td><td class="n">(50)</td></tr>
+ <tr><td>A/P</td><td class="n">55</td><td>+410 −395</td><td class="n">70</td></tr>
+ <tr><td>Wages payable</td><td class="n">8</td><td>+96 −100</td><td class="n">4</td></tr>
+ <tr><td>Customer deposits</td><td class="n">30</td><td>−30</td><td class="n">0</td></tr>
+ <tr><td>Note payable</td><td class="n">100</td><td>−20</td><td class="n">80</td></tr>
+ <tr><td>Paid-in capital</td><td class="n">300</td><td></td><td class="n">300</td></tr>
+ <tr><td>Retained earnings</td><td class="n">104</td><td>+191 −15</td><td class="n">280</td></tr></table></div>
+ <p class="small">Item 11: book value 40 − 25 = 15, proceeds 22, gain 7. Item 7: insurance expense 12 (old policy) + 12 (six months of the new one) = 24.</p>`},
+ {h:"(c) Income statement",b:`Sales 745 (700 + 45); COGS (405); gross profit 340; insurance (24); depreciation (30); wages (96); interest (6); gain on disposal 7. <b>Net income 191.</b>`},
+ {h:"(d) Balance sheet",b:`Assets: cash 267, A/R 90, inventory 95, prepaid 12, equipment 320 less AD 50 = 270. <b>Total 734.</b> Liabilities: A/P 70, wages payable 4, note 80 = 154. Equity: PIC 300, RE 280 = 580. <b>Total 734.</b>`},
+ {h:"(e) Cash flow statement",b:`Indirect: NI 191 + depreciation 30 − gain 7 − ΔA/R 30 − ΔInventory 5 − ΔPrepaid 0 + ΔA/P 15 − ΔWages payable 4 − ΔDeposits 30 = <b>CFO 160</b>. Investing: equipment (60), proceeds 22 = <b>(38)</b>. Financing: note (20), dividend (15) = <b>(35)</b>. Change in cash 87; 180 → 267 ✓.<p class="small" style="margin-top:6px">Direct check: receipts 420 + 265 = 685; suppliers (395); insurance (24); employees (100); interest (6) = 160 ✓. The deposit decrease is the subtle one: 45 of revenue, but 30 of the cash came in last year.</p>`}]},
+{id:"p2",mod:"Income statement",title:"Riverside Bikes",style:"Shemer shape. Growth eats cash.",tag:"in",
+ body:`<p>Riverside Bikes makes a single commuter bike for 2 and sells it for 3. It pays for production immediately, keeps an ending inventory equal to the units shipped that month, and collects every receivable 30 days after the sale. Sales were 400 units in January and the sales manager promises 600 in February, 900 in March and 1,300 in April.</p>
+ <p>January 1 balances: Cash 2,000; Inventory 800 (400 units); Receivables 1,200.</p>
+ <p><b>Required.</b> (a) Prepare the income statement, cash, inventory and receivables schedule for January through April in the Shemer format. (b) Cumulative net income versus the change in cash. What happened? (c) May sales are projected at 1,800 units. What is cash at the end of May? (d) The company asks you to lend it 2,000 at 1% per month. Would you?</p>`,
+ steps:[
+ {h:"(a) Income statement by month",b:`Sales 1,200 / 1,800 / 2,700 / 3,900. COGS (800) / (1,200) / (1,800) / (2,600). <b>NI 400 / 600 / 900 / 1,300.</b> Margin is a clean 1 per unit.`},
+ {h:"(a) Inventory and production",b:`Inventory EB must equal this month's shipments. Jan: 800 + prod − 800 = 800, prod 800. Feb: 800 + prod − 1,200 = 1,200, prod 1,600. Mar: 1,200 + prod − 1,800 = 1,800, prod 2,400. Apr: 1,800 + prod − 2,600 = 2,600, prod 3,400. Production each month is shipments plus the inventory build.`},
+ {h:"(a) Cash and receivables",b:`<div class="scroll"><table><tr><th></th><th class="n">Jan</th><th class="n">Feb</th><th class="n">Mar</th><th class="n">Apr</th></tr>
+ <tr><td>Cash BB</td><td class="n">2,000</td><td class="n">2,400</td><td class="n">2,000</td><td class="n">1,400</td></tr>
+ <tr><td>+ Collections (last month's sales)</td><td class="n">1,200</td><td class="n">1,200</td><td class="n">1,800</td><td class="n">2,700</td></tr>
+ <tr><td>− Payments (production at cost)</td><td class="n">(800)</td><td class="n">(1,600)</td><td class="n">(2,400)</td><td class="n">(3,400)</td></tr>
+ <tr class="total"><td>Cash EB</td><td class="n">2,400</td><td class="n">2,000</td><td class="n">1,400</td><td class="n">700</td></tr>
+ <tr><td>Receivables EB</td><td class="n">1,200</td><td class="n">1,800</td><td class="n">2,700</td><td class="n">3,900</td></tr></table></div>`},
+ {h:"(b) Profit up, cash down",b:`Cumulative NI 3,200; cash fell from 2,000 to 700. Each incremental unit of monthly growth ties up 2 of cost in the inventory build plus 3 of price in receivables, while only last month's smaller sales come in as cash. Profitable, growing, illiquid. Shemer: the manager left for Milan and the treasurer called.`},
+ {h:"(c) May",b:`Collections 3,900 (April sales). Production = 1,800 × 2 shipped + (3,600 − 2,600) build = 4,600. Cash = 700 + 3,900 − 4,600 = <b>0</b>.`},
+ {h:"(d) The loan",b:`2,000 at 1% buys about one more month of growth; the shortfall scales with sales. The fix is operational: slow the inventory build, collect faster, get supplier credit. If you lend, condition it on receivables turning over. The bank sees this in the cash flow statement, not the income statement.`}]},
+{id:"p3",mod:"Cash flow (M11)",title:"Marquette Tool & Die",style:"Dickerson shape. Indirect CFS from two balance sheets.",tag:"in",
+ body:`<div class="scroll"><table><tr><th></th><th class="n">Jan 1</th><th class="n">Dec 31</th></tr>
+ <tr><td>Cash</td><td class="n">210</td><td class="n">184</td></tr><tr><td>Accounts receivable</td><td class="n">480</td><td class="n">536</td></tr><tr><td>Inventory</td><td class="n">610</td><td class="n">585</td></tr><tr><td>Land</td><td class="n">300</td><td class="n">350</td></tr><tr><td>Equipment</td><td class="n">2,400</td><td class="n">2,590</td></tr><tr><td>Less accumulated depreciation</td><td class="n">(900)</td><td class="n">(1,015)</td></tr>
+ <tr class="total"><td>Total assets</td><td class="n">3,100</td><td class="n">3,230</td></tr>
+ <tr><td>Accounts payable</td><td class="n">265</td><td class="n">302</td></tr><tr><td>Wages payable</td><td class="n">40</td><td class="n">32</td></tr><tr><td>Taxes payable</td><td class="n">95</td><td class="n">118</td></tr><tr><td>Notes payable (long-term)</td><td class="n">800</td><td class="n">700</td></tr><tr><td>Common stock</td><td class="n">1,000</td><td class="n">1,060</td></tr><tr><td>Retained earnings</td><td class="n">900</td><td class="n">1,018</td></tr>
+ <tr class="total"><td>Total liabilities and equity</td><td class="n">3,100</td><td class="n">3,230</td></tr></table></div>
+ <p class="small">Additional information: net income 158; dividends declared and paid 40; depreciation expense 160; equipment that had cost 110 with accumulated depreciation of 45 was sold for 50 cash; the firm bought land and equipment for cash; notes were repaid at book value; new common stock was issued.</p>
+ <p><b>Required.</b> Prepare the statement of cash flows using the indirect method.</p>`,
+ steps:[
+ {h:"Work the fixed accounts first",b:`Accumulated depreciation: 900 + 160 − 45 = 1,015 ✓. Equipment: 2,590 = 2,400 − 110 + purchases, so purchases = <b>300</b>. Land: 50 bought. Disposal: book value 110 − 45 = 65, proceeds 50, <b>loss 15</b>. RE: 900 + 158 − 40 = 1,018 ✓.`},
+ {h:"Operating",b:`NI 158 + depreciation 160 + loss 15 − ΔA/R 56 + ΔInventory 25 + ΔA/P 37 − ΔWages payable 8 + ΔTaxes payable 23 = <b>354</b>.`},
+ {h:"Investing and financing",b:`Investing: land (50), equipment (300), proceeds 50 = <b>(300)</b>. Financing: notes (100), stock 60, dividends (40) = <b>(80)</b>.`},
+ {h:"Tie it out",b:`354 − 300 − 80 = (26). Cash 210 → 184 ✓. Graders look for the full 50 of proceeds in investing with the 15 loss added back in operating, and purchases of 300 rather than the naive 190 change in the account.`}]},
+{id:"p4",mod:"Cash flow (M11)",title:"Kingsbridge Supply",style:"Sheffer shape. Rebuild the income statement from direct-method cash flows.",tag:"in",
+ body:`<p>Kingsbridge Supply's 2026 statement of cash flows showed operating activities as:</p>
+ <div class="scroll"><table><tr><td>Collections from customers</td><td class="n">1,840</td></tr><tr><td>Payments to suppliers</td><td class="n">(1,120)</td></tr><tr><td>Payments to employees</td><td class="n">(515)</td></tr><tr><td>Payments of interest</td><td class="n">(40)</td></tr><tr><td>Payments of income tax</td><td class="n">(95)</td></tr><tr class="total"><td>Cash flow from operating activities</td><td class="n">70</td></tr></table></div>
+ <div class="scroll"><table><tr><th></th><th class="n">Beginning</th><th class="n">End</th></tr>
+ <tr><td>Accounts receivable</td><td class="n">300</td><td class="n">345</td></tr><tr><td>Merchandise inventory</td><td class="n">210</td><td class="n">250</td></tr><tr><td>Accounts payable</td><td class="n">130</td><td class="n">148</td></tr><tr><td>Wages payable</td><td class="n">25</td><td class="n">31</td></tr><tr><td>Interest payable</td><td class="n">10</td><td class="n">6</td></tr><tr><td>Income tax payable</td><td class="n">60</td><td class="n">72</td></tr><tr><td>Plant and equipment (at cost)</td><td class="n">900</td><td class="n">960</td></tr><tr><td>Accumulated depreciation</td><td class="n">300</td><td class="n">372</td></tr></table></div>
+ <p class="small">The company bought 60 of plant and equipment during the year and sold none. All sales and inventory purchases were on credit.</p>
+ <p><b>Required.</b> (a) Prepare the 2026 income statement. (b) Which method did the company use? (c) Reconcile net income to the 70 of operating cash flow.</p>`,
+ steps:[
+ {h:"(a) Each line is EB = BB + increases − decreases",b:`Sales = 1,840 + 45 = <b>1,885</b>. Purchases = 1,120 + 18 = 1,138; COGS = 210 + 1,138 − 250 = <b>1,098</b>. Wages = 515 + 6 = <b>521</b>. Interest = 40 − 4 = <b>36</b> (the payable fell, so cash paid exceeded expense). Tax = 95 + 12 = <b>107</b>. Depreciation = 372 − 300 = <b>72</b>.`},
+ {h:"(a) Assemble",b:`Sales 1,885 − COGS 1,098 = gross profit 787; less wages 521, depreciation 72, interest 36, tax 107 = <b>net income 51</b>.`},
+ {h:"(b) Method",b:`Direct. It lists cash received and paid by category instead of starting from net income.`},
+ {h:"(c) Reconcile",b:`51 + 72 − 45 − 40 + 18 + 6 − 4 + 12 = <b>70</b> ✓. A thin profit and positive operating cash despite inventory and receivables both growing, because the 72 of depreciation is non-cash.`}]},
+{id:"p6",mod:"Basic procedures (M3)",title:"Bowery Running Co.",style:"Adjusting entries, Sep 22 exercise shape.",tag:"in",
+ body:`<p>Bowery Running Co. runs a treadmill studio in Nolita. Year end is December 31, 2026. Nothing below has been recorded yet except where stated.</p>
+ <ol class="plain small">
+ <li>On September 1 it paid 1,800 for a 12-month liability insurance policy and recorded the whole amount as prepaid insurance.</li>
+ <li>On November 1 it borrowed 20,000 at 6%, interest payable each November 1.</li>
+ <li>In December it sold 5,400 of gift cards; 1,900 were redeemed by December 31. Nothing was recorded on redemption.</li>
+ <li>Staff earned 2,600 for the last week of December, to be paid January 3.</li>
+ <li>The treadmill fleet cost 24,000 on January 1, 2026, five-year life, no salvage, straight line.</li>
+ <li>Rent is 3,000 per month. December rent has not been paid.</li>
+ <li>On October 1 a corporate client prepaid 6,000 for 12 monthly training sessions; three had been delivered by December 31.</li>
+ </ol>
+ <p><b>Required.</b> Write each year-end adjusting entry in accounting equation form and state the net effect on 2026 income.</p>`,
+ steps:[
+ {h:"1 to 2: time-based",b:`1. Prepaid insurance (600) | Insurance expense (600). Four of twelve months used: 1,800 × 4/12. Prepaid left 1,200.<br>2. Interest payable +200 | Interest expense (200). 20,000 × 0.06 × 2/12.`},
+ {h:"3 to 4: unearned and accrued",b:`3. Gift card liability was recorded at 5,400 when sold. Redemption: Gift card liability (1,900) | Sales revenue +1,900. Liability left 3,500.<br>4. Wages payable +2,600 | Wage expense (2,600).`},
+ {h:"5 to 7: depreciation, accrued rent, deferred revenue",b:`5. Accumulated depreciation (4,800) on the asset side | Depreciation expense (4,800). 24,000 / 5.<br>6. Rent payable +3,000 | Rent expense (3,000).<br>7. Unearned revenue (1,500) | Service revenue +1,500. 6,000 × 3/12; 4,500 still owed as sessions.`},
+ {h:"Net effect on income",b:`Revenue 1,900 + 1,500 = 3,400. Expenses 600 + 200 + 2,600 + 4,800 + 3,000 = 11,200. <b>Income falls by 7,800</b> from these adjustments. None of them touch cash, which is the point of the exercise.`}]},
+{id:"p7",mod:"Statements & 10-K (M1-M2)",title:"Fulton Street Market",style:"PS2 shape. Articulation across the three statements.",tag:"in",
+ body:`<p>Condensed statements for Fulton Street Market, a grocery chain, fiscal 2026 (in thousands).</p>
+ <div class="scroll"><table><tr><th>Balance sheet</th><th class="n">2025</th><th class="n">2026</th></tr>
+ <tr><td>Cash</td><td class="n">420</td><td class="n">510</td></tr><tr><td>Accounts receivable</td><td class="n">60</td><td class="n">70</td></tr><tr><td>Inventory</td><td class="n">1,150</td><td class="n">1,230</td></tr><tr><td>PP&E, net</td><td class="n">2,800</td><td class="n">2,950</td></tr>
+ <tr class="total"><td>Total assets</td><td class="n">4,430</td><td class="n">4,760</td></tr>
+ <tr><td>Accounts payable</td><td class="n">690</td><td class="n">720</td></tr><tr><td>Accrued liabilities</td><td class="n">310</td><td class="n">340</td></tr><tr><td>Long-term debt</td><td class="n">1,500</td><td class="n">1,400</td></tr><tr><td>Paid-in capital</td><td class="n">800</td><td class="n">800</td></tr><tr><td>Retained earnings</td><td class="n">1,130</td><td class="n">1,500</td></tr></table></div>
+ <div class="scroll"><table><tr><th>Income statement 2026</th><th class="n"></th></tr><tr><td>Sales</td><td class="n">9,800</td></tr><tr><td>Cost of sales</td><td class="n">(7,350)</td></tr><tr><td>SG&A</td><td class="n">(1,500)</td></tr><tr><td>Depreciation</td><td class="n">(290)</td></tr><tr><td>Interest</td><td class="n">(70)</td></tr><tr><td>Income tax</td><td class="n">(120)</td></tr><tr class="total"><td>Net income</td><td class="n">470</td></tr></table></div>
+ <p><b>Required.</b> (a) The change in cash in 2026, and every statement that shows it. (b) Dividends paid in 2026, and the statements that show the retained earnings link. (c) Capital expenditures in 2026, assuming no disposals. (d) Prepare the 2026 cash flow statement, indirect method. (e) Inventory is the second-largest asset. Can we conclude it is one of the company's most valuable resources? (f) Why is the owners' claim (2,300) so much less than total assets?</p>`,
+ steps:[
+ {h:"(a) Change in cash",b:`510 − 420 = <b>+90</b>. Shown on the balance sheet (two columns) and as the bottom line of the cash flow statement.`},
+ {h:"(b) Retained earnings roll",b:`1,130 + 470 − dividends = 1,500, so dividends = <b>100</b>. Net income is on the income statement and in the statement of shareholders' equity; the roll sits in that statement and the two balance sheet columns.`},
+ {h:"(c) Capex",b:`PP&E net: 2,800 + capex − 290 = 2,950, so capex = <b>440</b>. Same EB = BB + increases − decreases logic as every other account.`},
+ {h:"(d) Cash flow statement",b:`Operating: 470 + 290 − ΔA/R 10 − ΔInventory 80 + ΔA/P 30 + ΔAccrued 30 = <b>730</b>. Investing: capex <b>(440)</b>. Financing: debt repaid (100), dividends (100) = <b>(200)</b>. Net 90 ✓.`},
+ {h:"(e) Inventory and value",b:`No. Inventory is at cost, and the balance sheet is a list of costs incurred in exchanges, not a valuation. The things that make a grocer valuable (store locations, supplier relationships, the brand, the team) are mostly not on the balance sheet because they were not acquired in an arm's-length exchange. His Coca-Cola point: the trademark is not on Coke's balance sheet because they did not buy it.`},
+ {h:"(f) Owners' claim",b:`Assets are financed by both creditors and owners: 4,760 = 2,460 of liabilities + 2,300 of equity. Suppliers finance the inventory through payables and the debt finances the stores. The equity is the residual, and book equity says nothing about market value (his Amazon point in PS2).`}]},
+{id:"p5",mod:"Revenue recognition (M5)",title:"Lakeshore Outdoor",style:"GM case shape. Incentives as a reduction of revenue.",tag:"in",
+ body:` <p>Lakeshore Outdoor manufactures kayaks and sells only through independent franchised dealers. A dealer orders a kayak on November 20. Lakeshore ships it from inventory on December 10 at an invoice price of 1,200 (cost to produce 850), payable in 60 days. The dealer sells it to a customer on January 14 for 1,450. To clear year-end dealer inventory, Lakeshore ran a December promotion: 100 cash back to any customer who buys a Lakeshore kayak before January 31, paid by Lakeshore directly to the customer, and 50 to the dealer for each unit sold in that window.</p>
+ <p><b>Required.</b> For (A) Lakeshore and (B) the dealer, state what their revenues, costs and profits are, when each item is recognized, and how it is reported. Then compare the cash and accounting pictures for Lakeshore at December 31 and January 31.</p>`,
+ steps:[
+ {h:"(A) Lakeshore: who is the customer",b:`The dealer, not the kayaker, because all sales run through franchised dealers. Control transfers on shipment, December 10. Revenue 1,200 and COGS 850 in December, with a 1,200 receivable.`},
+ {h:"(A) Lakeshore: the incentives",b:`Cash back and the dealer bonus are consideration payable to a customer or the customer's customer, so they reduce the transaction price rather than appear as January marketing expense. If Lakeshore expects to pay on this unit, December revenue is 1,200 − 100 − 50 = 1,050, gross profit 200, with a 150 liability. This is the GM question: are the incentives a reduction of price or a cost of selling?`},
+ {h:"(B) The dealer",b:`Inventory of 1,200 in December with a payable. Revenue 1,450 on January 14 on delivery to the customer, COGS 1,200, gross profit 250. The 50 dealer incentive is consideration from a vendor and normally reduces COGS. The 100 cash back runs between Lakeshore and the customer and never touches the dealer's books.`},
+ {h:"Compare cash and accrual",b:`At December 31 Lakeshore shows a sale and a profit on a unit that produced no cash and will cost 150 in January. By January 31 it has paid 150 and collected nothing (the 60-day terms run to early February). The receivable up and incentive liability up are exactly what the indirect method subtracts and adds back. GM's lesson: with heavy incentives, when revenue is recognized is really whether the dealer is a customer or a holding bay for inventory.`}]},
+{id:"p8",mod:"Cash flow (M11)",title:"Catskill Hard Cider Co.",style:"Practice midterm Q2 shape (40 points). Net income not given.",tag:"in",
+ body:`<p>Balance sheets for Catskill Hard Cider Co. ($ thousands):</p>
+ <div class="scroll"><table><tr><th></th><th class="n">Dec 31, 2025</th><th class="n">Dec 31, 2024</th></tr>
+ <tr><td>Cash</td><td class="n">13,000</td><td class="n">26,000</td></tr><tr><td>Accounts receivable</td><td class="n">47,000</td><td class="n">41,000</td></tr><tr><td>Inventory</td><td class="n">81,000</td><td class="n">88,000</td></tr><tr><td>Prepaid expense</td><td class="n">9,000</td><td class="n">7,000</td></tr>
+ <tr><td>PP&E, gross</td><td class="n">435,000</td><td class="n">410,000</td></tr><tr><td>Less accumulated depreciation</td><td class="n">(124,000)</td><td class="n">(120,000)</td></tr>
+ <tr><td>Brand license, gross</td><td class="n">50,000</td><td class="n">50,000</td></tr><tr><td>Less accumulated amortization</td><td class="n">(20,000)</td><td class="n">(15,000)</td></tr>
+ <tr class="total"><td>Total assets</td><td class="n">491,000</td><td class="n">487,000</td></tr>
+ <tr><td>Accounts payable</td><td class="n">36,000</td><td class="n">30,000</td></tr><tr><td>Accrued wages</td><td class="n">7,000</td><td class="n">9,000</td></tr><tr><td>Interest payable</td><td class="n">2,000</td><td class="n">3,000</td></tr><tr><td>Income tax payable</td><td class="n">8,000</td><td class="n">6,000</td></tr><tr><td>Bonds payable</td><td class="n">110,000</td><td class="n">150,000</td></tr>
+ <tr><td>Common stock</td><td class="n">268,000</td><td class="n">250,000</td></tr><tr><td>Treasury stock</td><td class="n">(12,000)</td><td class="n">0</td></tr><tr><td>Retained earnings</td><td class="n">72,000</td><td class="n">39,000</td></tr>
+ <tr class="total"><td>Total liabilities and equity</td><td class="n">491,000</td><td class="n">487,000</td></tr></table></div>
+ <ul class="plain small"><li>Stock-based compensation was $4,000; it is non-cash and credited to common stock.</li><li>Depreciation was recorded on PP&E. Amortization was recorded on the brand license; none was bought or sold.</li><li>Sold a pressing line for $21,000 cash that cost $45,000 and had $30,000 of accumulated depreciation.</li><li>Bought new equipment for cash.</li><li>Retired $40,000 of bonds (at book value) by paying bondholders $38,000.</li><li>A $15,000 cash dividend was declared and paid.</li><li>Issued common stock for cash and repurchased shares, reflected in treasury stock.</li></ul>
+ <p><b>Required.</b> (a) Net income, depreciation, amortization, gain or loss on the equipment sale, gain or loss on the bond retirement, equipment purchased and stock issued for cash. (b) Statement of cash flows, indirect method.</p>`,
+ steps:[
+ {h:"(a) Net income from retained earnings",b:`72,000 = 39,000 + NI − 15,000, so <b>NI = 48,000</b>.`},
+ {h:"(a) The two contra accounts",b:`Depreciation: 124,000 = 120,000 + dep − 30,000, so <b>34,000</b>. Amortization: 20,000 − 15,000 = <b>5,000</b>.`},
+ {h:"(a) The gains, capex and stock issued",b:`Equipment: 21,000 − (45,000 − 30,000) = <b>gain 6,000</b>. Bonds: book value 40,000 retired for 38,000 cash = <b>gain 2,000</b>. Capex: 435,000 = 410,000 + X − 45,000, so <b>70,000</b>. Stock issued: 268,000 − 250,000 − 4,000 SBC = <b>14,000</b>.`},
+ {h:"(b) Operating",b:`48,000 + SBC 4,000 + dep 34,000 + amort 5,000 − gain on equipment 6,000 − gain on bonds 2,000 − ΔA/R 6,000 + ΔInventory 7,000 − ΔPrepaid 2,000 + ΔA/P 6,000 − ΔAccrued wages 2,000 − ΔInterest payable 1,000 + ΔTax payable 2,000 = <b>87,000</b>.`},
+ {h:"(b) Investing and financing",b:`Investing: proceeds 21,000, purchases (70,000) = <b>(49,000)</b>. Financing: bond retirement (38,000), dividends (15,000), stock issued 14,000, treasury purchase (12,000) = <b>(51,000)</b>.`},
+ {h:"Tie it out",b:`87,000 − 49,000 − 51,000 = (13,000). Cash 26,000 → 13,000 ✓. The two new wrinkles versus Dickerson: a gain on the bond retirement comes out of operating (the 38,000 paid is all financing), and the SBC piece of the common stock change is not cash. Same pattern as Shake Shack (2023) and Dairy Co. (2025).`}]},
+{id:"p9",mod:"Revenue recognition (M5)",title:"Peloton Bike+ holiday bundle",style:"Practice midterm Q3 shape (40 points). Hypothetical numbers.",tag:"in",
+ body:`<p>For the holidays, Peloton sells a Bike+ bundle for $2,995: the bike, 12 months of All-Access membership, a 2-year extended warranty, and 10 one-on-one virtual training sessions. Standalone selling prices:</p>
+ <div class="scroll"><table><tr><th>Performance obligation</th><th class="n">Standalone selling price</th></tr><tr><td>Bike+</td><td class="n">$2,500</td></tr><tr><td>All-Access membership (12 months)</td><td class="n">$44/month</td></tr><tr><td>Extended warranty (24 months)</td><td class="n">$10/month</td></tr><tr><td>Training sessions (10)</td><td class="n">$60/session</td></tr></table></div>
+ <p>Peloton's data shows a bundle buyer uses 2 training sessions per month, and it uses this to recognize revenue. On November 1, 2026 a customer pays $2,995 in cash and the bike is delivered the same day. Ignore cost of goods sold, cancellations and time value of money.</p>
+ <p><b>Required.</b> (a) When should each piece be recognized? (b) Work through the five steps and record all revenue-related entries for 2026. (c) Which component creates the largest deferred revenue at the sale? (d) How much revenue in 2027, and what is left in deferred revenue at the end of 2027? (e) If the customer had bought on credit, what changes?</p>`,
+ steps:[
+ {h:"(a) Point in time vs over time",b:`Bike at delivery, a point in time. Membership and warranty over time, by months elapsed. Training over time by sessions used, which is the Tesla Supercharging-miles twist: usage, not the calendar.`},
+ {h:"Steps 1 to 3",b:`Contract: bike, 12 months of membership, 24 months of warranty, 10 sessions. Four distinct performance obligations. Transaction price P = $2,995.`},
+ {h:"Step 4: allocate by relative SSP",b:`SSPs: 2,500 + 528 + 240 + 600 = 3,868. Each share = SSP / 3,868 × 2,995.
+ <div class="scroll"><table><tr><td>Bike+</td><td class="n">1,935.75</td></tr><tr><td>Membership</td><td class="n">408.83</td></tr><tr><td>Warranty</td><td class="n">185.83</td></tr><tr><td>Training</td><td class="n">464.58</td></tr><tr class="total"><td>Total (rounding)</td><td class="n">2,995.00</td></tr></table></div>
+ The $873 bundle discount is spread across all four, not dumped on the bike.`},
+ {h:"Step 5: entries in 2026",b:`Nov 1: Cash +2,995.00 = Deferred revenue +1,059.25 + Sales revenue (bike) +1,935.75.<br>Dec 31: Deferred revenue −269.46 = Sales revenue +269.46, made up of membership 408.83 × 2/12 = 68.14, warranty 185.83 × 2/24 = 15.49, training 464.58 × 4/10 = 185.83.<br><b>2026 revenue = 2,205.21.</b>`},
+ {h:"(c) Largest deferral",b:`Training, 464.58, ahead of membership at 408.83. It also burns off fastest, all of it gone by April 2027.`},
+ {h:"(d) 2027",b:`Membership 408.83 × 10/12 = 340.69; warranty 185.83 × 12/24 = 92.92; training 464.58 × 6/10 = 278.75. <b>2027 revenue = 712.36.</b> Left in deferred revenue: warranty only, 185.83 × 10/24 = <b>77.43</b>. Check: 1,935.75 + 269.46 + 712.36 + 77.43 = 2,995.00.`},
+ {h:"(e) On credit",b:`A/R +2,995 replaces cash. Revenue is identical: earned and realizable does not depend on collection. The same part (c) appeared on the 2024 and 2025 midterms.`}]},
+{id:"p10",mod:"Reading a 10-K",title:"Hudson & Pine",style:"Practice midterm Q4 shape (60 points). Fictional specialty apparel retailer.",tag:"in",
+ body:`<p>Condensed statements, fiscal years ended January 31 ($ thousands).</p>
+ <div class="scroll"><table><tr><th>Balance sheet</th><th class="n">FY2025</th><th class="n">FY2024</th></tr>
+ <tr><td>Cash</td><td class="n">182,400</td><td class="n">151,900</td></tr><tr><td>Accounts receivable</td><td class="n">21,300</td><td class="n">18,700</td></tr><tr><td>Merchandise inventory</td><td class="n">412,600</td><td class="n">371,200</td></tr><tr><td>Prepaid expenses</td><td class="n">24,800</td><td class="n">22,100</td></tr><tr class="sub"><td>Total current assets</td><td class="n">641,100</td><td class="n">563,900</td></tr>
+ <tr><td>PP&E, net</td><td class="n">538,200</td><td class="n">512,700</td></tr><tr><td>Goodwill</td><td class="n">64,000</td><td class="n">64,000</td></tr><tr class="total"><td>Total assets</td><td class="n">1,243,300</td><td class="n">1,140,600</td></tr>
+ <tr><td>Accounts payable</td><td class="n">198,400</td><td class="n">176,300</td></tr><tr><td>Accrued payroll</td><td class="n">46,700</td><td class="n">41,900</td></tr><tr><td>Gift card liability</td><td class="n">38,900</td><td class="n">33,600</td></tr><tr><td>Income taxes payable</td><td class="n">9,100</td><td class="n">11,800</td></tr><tr class="sub"><td>Total current liabilities</td><td class="n">293,100</td><td class="n">263,600</td></tr>
+ <tr><td>Long-term debt</td><td class="n">250,000</td><td class="n">275,000</td></tr><tr><td>Common stock and APIC</td><td class="n">312,000</td><td class="n">305,000</td></tr><tr><td>Treasury stock</td><td class="n">(60,000)</td><td class="n">(40,000)</td></tr><tr><td>Retained earnings</td><td class="n">448,200</td><td class="n">337,000</td></tr><tr class="total"><td>Total liabilities and equity</td><td class="n">1,243,300</td><td class="n">1,140,600</td></tr></table></div>
+ <div class="scroll"><table><tr><th>Income statement</th><th class="n">FY2025</th><th class="n">FY2024</th></tr><tr><td>Net sales</td><td class="n">1,960,000</td><td class="n">1,812,000</td></tr><tr><td>Cost of sales</td><td class="n">(1,117,200)</td><td class="n">(1,050,960)</td></tr><tr><td>SG&A</td><td class="n">(589,000)</td><td class="n"></td></tr><tr><td>Depreciation and amortization</td><td class="n">(71,400)</td><td class="n"></td></tr><tr><td>Interest expense</td><td class="n">(16,800)</td><td class="n"></td></tr><tr><td>Income tax</td><td class="n">(29,400)</td><td class="n"></td></tr><tr class="total"><td>Net income</td><td class="n">136,200</td><td class="n"></td></tr></table></div>
+ <div class="scroll"><table><tr><th>Cash flow statement, FY2025</th><th class="n"></th></tr><tr><td>Net income</td><td class="n">136,200</td></tr><tr><td>Depreciation and amortization</td><td class="n">71,400</td></tr><tr><td>Stock-based compensation</td><td class="n">7,000</td></tr><tr><td>Loss on disposal of PP&E</td><td class="n">1,300</td></tr><tr><td>Accounts receivable</td><td class="n">(2,600)</td></tr><tr><td>Merchandise inventory</td><td class="n">(41,400)</td></tr><tr><td>Prepaid expenses</td><td class="n">(2,700)</td></tr><tr><td>Accounts payable</td><td class="n">22,100</td></tr><tr><td>Accrued payroll</td><td class="n">4,800</td></tr><tr><td>Gift card liability</td><td class="n">5,300</td></tr><tr><td>Income taxes payable</td><td class="n">(2,700)</td></tr><tr class="total"><td>Cash from operating activities</td><td class="n">198,700</td></tr>
+ <tr><td>Capital expenditures</td><td class="n">(101,700)</td></tr><tr><td>Proceeds from sale of PP&E</td><td class="n">3,500</td></tr><tr class="total"><td>Cash used in investing</td><td class="n">(98,200)</td></tr><tr><td>Repayment of long-term debt</td><td class="n">(25,000)</td></tr><tr><td>Repurchase of common stock</td><td class="n">(20,000)</td></tr><tr><td>Dividends paid</td><td class="n">(25,000)</td></tr><tr class="total"><td>Cash used in financing</td><td class="n">(70,000)</td></tr><tr class="total"><td>Increase in cash</td><td class="n">30,500</td></tr></table></div>
+ <p class="small"><i>Footnote excerpt: Gift cards do not expire. Cash received on the sale of a gift card is recorded as a liability; revenue is recognized when the card is redeemed. Payroll and benefits expense, included in SG&A, was $312,500 in FY2025 and is accrued and paid later.</i></p>
+ <p><b>Required.</b> (a) Which current asset changed the most, and what might that tell you? (b) How much cash was paid to employees in FY2025? (c) Which account holds unredeemed gift cards? Its FY2025 balance, sample entries for a sale and a redemption, and why its change is added in operating cash flow. (d) Confirm capex from the balance sheet. (e) Did gross margin improve? (f) Net income, dividends, and where you would confirm both. (g) What is treasury stock and where does it show up in the cash flow statement? (h) What gives rise to goodwill?</p>`,
+ steps:[
+ {h:"(a) Inventory, and the operator read",b:`Inventory rose 41,400 (11.2%), the largest change. Sales grew 8.2% ((1,960,000 − 1,812,000) / 1,812,000). Inventory outgrowing sales is the first thing to ask about in a retailer: either a deliberate build for growth or slower sell-through that ends in markdowns. Suppliers financed about half of it (A/P up 22,100).`},
+ {h:"(b) Cash paid to employees",b:`41,900 + 312,500 − cash paid = 46,700, so <b>307,700</b>. Same roll as Chipotle's accrued payroll on the 2025 midterm.`},
+ {h:"(c) Gift cards",b:`Gift card liability, an unearned revenue account, <b>38,900</b>. Sale: Cash +X = Gift card liability +X. Redemption: Gift card liability −X = Sales revenue +X (equity ↑). The liability grew 5,300: cash came in that is not yet in net income, so it is added back, same direction as any current liability increase.`},
+ {h:"(d) Capex",b:`PP&E net: 512,700 + capex − 71,400 D&A − book value sold = 538,200. Book value sold = proceeds 3,500 + loss 1,300 = 4,800. Capex = <b>101,700</b> ✓ matches the CFS. (Strictly, the 71,400 includes any amortization; with no intangibles other than goodwill, all of it is depreciation.)`},
+ {h:"(e) Gross margin",b:`FY2024: 1 − 1,050,960 / 1,812,000 = 42.0%. FY2025: 1 − 1,117,200 / 1,960,000 = 43.0%. Up one point, so the inventory build did not show up as markdowns this year. Watch it next year.`},
+ {h:"(f) Net income and dividends",b:`NI 136,200 on the income statement. Dividends 25,000: financing section of the CFS, and the RE roll 337,000 + 136,200 − 25,000 = 448,200 ✓.`},
+ {h:"(g) Treasury stock",b:`Shares the company bought back, a contra-equity account (60,000 − 40,000 = 20,000 repurchased). Financing outflow, "repurchase of common stock".`},
+ {h:"(h) Goodwill",b:`An acquisition. Goodwill only exists when the company buys another business for more than the fair value of its identifiable net assets. It is unchanged, so no deal and no impairment this year.`}]},
+];
+const probs=document.getElementById("probs"),modFilter=document.getElementById("modFilter"),progSummary=document.getElementById("progSummary");
+let prog={};try{prog=JSON.parse(localStorage.getItem("fa-prog2")||"{}")}catch(e){prog={}}
+let curMod="All";
+function saveProg(){try{localStorage.setItem("fa-prog2",JSON.stringify(prog))}catch(e){}}
+MODULES.forEach(m=>{const b=document.createElement("button");b.type="button";b.className="pill"+(m==="All"?" on":"");b.textContent=m;b.onclick=()=>{curMod=m;modFilter.querySelectorAll(".pill").forEach(x=>x.classList.toggle("on",x===b));renderProbs()};modFilter.appendChild(b)});
+function renderProbs(){
+  probs.innerHTML="";
+  const list=PROBS.filter(p=>curMod==="All"||p.mod===curMod);
+  if(!list.length){probs.innerHTML=`<div class="card"><p class="muted">No problems filed under this module yet. They get added as the sessions are uploaded.</p></div>`}
+  list.forEach((p,i)=>{
+    const d=document.createElement("div");d.className="card prob";
+    const stepsHtml=p.steps.map((s,k)=>`<div class="st" data-k="${k}" style="display:${k===0?"block":"none"}"><h4>${s.h}</h4><div class="small">${s.b}</div></div>`).join("");
+    d.innerHTML=`<div class="hd"><h2>${p.title}</h2><span class="tag ${p.tag}">${p.tag==="in"?"in scope":"pending"}</span></div><div class="muted small">${p.mod} · ${p.style}</div><div style="margin-top:8px">${p.body}</div>
+     <details class="steps"><summary>Solution, one step at a time</summary><div class="solwrap">${stepsHtml}</div><div class="row" style="margin-top:8px"><button type="button" class="btn sec next">Next step</button><button type="button" class="btn ghost all">Show all</button></div></details>
+     <div class="mark" data-id="${p.id}"><span class="muted small">Mark:</span>${["Solid","Shaky","Missed"].map(s=>`<button type="button" data-s="${s}" class="${s} ${prog[p.id]===s?"on":""}">${s}</button>`).join("")}</div>`;
+    const sts=d.querySelectorAll(".st");let shown=1;sts[0].classList.add("show");
+    const nb=d.querySelector(".next"),ab=d.querySelector(".all");
+    const upd=()=>{nb.disabled=shown>=sts.length;ab.disabled=shown>=sts.length;};
+    nb.onclick=()=>{if(shown<sts.length){sts[shown].style.display="block";sts[shown].classList.add("show");shown++;upd();}};
+    ab.onclick=()=>{sts.forEach(s=>{s.style.display="block";s.classList.add("show")});shown=sts.length;upd();};
+    upd();probs.appendChild(d);
+  });
+  const c={Solid:0,Shaky:0,Missed:0};PROBS.forEach(p=>{if(prog[p.id])c[prog[p.id]]++});
+  progSummary.textContent=`${PROBS.length} problems. Solid ${c.Solid}, Shaky ${c.Shaky}, Missed ${c.Missed}, unmarked ${PROBS.length-c.Solid-c.Shaky-c.Missed}.`;
+}
+probs.addEventListener("click",e=>{const b=e.target.closest(".mark button");if(!b)return;const id=b.parentElement.dataset.id;prog[id]=prog[id]===b.dataset.s?undefined:b.dataset.s;saveProg();renderProbs()});
+renderProbs();
+
+/* ---------- Traps ---------- */
+const TRAPS=[
+ {t:"Treating a customer advance as revenue",w:"Cash +40, Sales +40 when the deposit arrives",r:"Cash +40, Advances from customers +40. Revenue only when you deliver, at the full price.",y:"Sep 8: the gym that collects fees up front 'increases cash and increases unearned revenue, which is a liability.' GIJoe item 6 is built to catch this."},
+ {t:"Expensing a prepayment all at once",w:"Rent expense 36 when 18 months are paid on Jan 1",r:"Prepaid rent 36, then 24 of rent expense this year and 12 left as an asset.",y:"Sep 8, the law firm that expensed a full year: 'it's not matching.' Count the months. Assets are expenses waiting to happen, but only when they happen."},
+ {t:"Netting the PP&E sale into one operating line",w:"Add the 25 of proceeds to operating cash and ignore the loss",r:"Proceeds 25 in investing. Loss 5 added back in operating. Remove gross cost and its accumulated depreciation from the balance sheet.",y:"Dickerson item 3. His words on Sep 29: the gain 'doesn't belong there, it belongs instead in the investing section.'"},
+ {t:"Reading capex off the change in the PP&E account",w:"Capex = 9,546 − 8,678 = 868",r:"9,546 = 8,678 + capex − 150 cost disposed, so capex = 1,018.",y:"Sep 29: 'they're just gonna give you balance sheet numbers and you're gonna work backwards to figure it out, and that you need to know for the midterm.'"},
+ {t:"Flipping the working capital signs",w:"Add the increase in A/R; subtract the increase in A/P",r:"Subtract increases in current operating assets. Add increases in current operating liabilities. Decreases flip.",y:"His anchor: one credit sale, not collected. It is in net income, it is not cash, so the A/R increase comes out. 'All the other current assets work the same way.'"},
+ {t:"Putting interest in financing",w:"Interest paid 6 in financing with the principal",r:"Interest paid is operating under US GAAP. Only principal is financing.",y:"Sep 24 slides: interest paid is 'illogically' operating under US GAAP; IFRS allows a choice. Dividends paid are financing."},
+ {t:"Recording the sale but not the cost",w:"A/R +8,800, Sales +8,800 and stop",r:"Also Inventory (8,000), COGS (8,000). Two entries at the moment of sale.",y:"The car dealer example from Sep 22. Matching is the second half of revenue recognition."},
+ {t:"Accumulated depreciation as a liability",w:"List accumulated depreciation under liabilities",r:"It is a contra asset. Show PP&E gross less accumulated depreciation, or PP&E net.",y:"He flagged this on Sep 8 when a student asked. Classification is graded; line order is not."},
+ {t:"Wage expense equals cash paid",w:"Wage expense 50 because 50 was paid",r:"Wage expense 48 (earned). Payable: 8 + 48 − 50 = 6.",y:"GIJoe item 10. EB = BB + earned − paid, every time."},
+ {t:"Dividends on the income statement",w:"Dividends (24) as an expense below net income",r:"Dividends reduce retained earnings directly. Ending RE = beginning RE + NI − dividends.",y:"Sep 22: dividends go to a dividends account that closes to retained earnings, never through income."},
+ {t:"Owner money as revenue",w:"Mrs. GIJoe's lottery win, or a stock issue, counted as income",r:"Owner transactions are equity, not revenue. Personal windfalls are not the company's at all.",y:"Accounting entity assumption. His revenue definition: 'the product of the company,' what you are in the business of selling."},
+ {t:"A gain on a park sale called revenue",w:"Six Flags books the sale of an amusement park as revenue",r:"Gain on disposal, incidental, below operating income.",y:"Sep 15: Six Flags Over Texas tried it and 'weren't allowed to do that.' Revenue is what you sell every day."},
+ {t:"Using the loan-out as operating",w:"Loan of 50 to the sister company in operating cash flow",r:"Investing outflow. Interest received later is operating; principal repaid is investing.",y:"DEF item 10. Left-hand-side non-operating assets are investing."},
+ {t:"Lending on the income statement",w:"Approve Shemer's loan because net income rose every month",r:"Read the cash statement. Profitable growth funded by inventory and receivables runs out of cash; the loan buys one month.",y:"Shemer: 'How can a firm show increasing net income but a decreasing amount of cash?' That question is the case."},
+ {t:"Putting the bundle discount on one piece",w:"Bike revenue 2,500, services get whatever is left",r:"Allocate the whole price by relative standalone selling price: 2,500 / 3,868 × 2,995 = 1,935.75.",y:"Step 4. Every practice midterm Q3 uses SSPs that add up to more than the bundle price. The graders key on Step 5, so a wrong allocation carries through every entry."},
+ {t:"Recognizing usage-based pieces by the calendar",w:"Supercharging miles: 700 × 1/48 in December",r:"700 × 833 / 10,000 = 58.31 in December, because Tesla recognizes it on miles driven.",y:"The Tesla case. He said Oct 1 that the exam rev rec question is 'typically' a problem like Tesla."},
+ {t:"Recognizing everything at the sale",w:"Sales revenue 35,000 on December 1",r:"Vehicle 28,000 at delivery; 7,000 to deferred revenue, recognized as the services are provided.",y:"Part (a) every year: hardware at a point in time, services over time."},
+ {t:"Incentives as an expense next year",w:"GM records 3M of incentives as 2024 marketing expense",r:"Reduce 2023 revenue by the expected 3M and record an incentive liability.",y:"GM case: matching puts it in 2023, and because it lowers the effective price it is contra-revenue, not expense."},
+ {t:"Booking an entry for the CEO's portfolio",w:"Cash +12,000, Gain +12,000",r:"No entry.",y:"2025 Q1 item 10. Accounting entity assumption, same as Mrs. GIJoe's lottery ticket."},
+ {t:"Capitalizing R&D because it might work",w:"R&D asset 50",r:"R&D expense 50.",y:"2023 and 2024 Q1. Expensed as incurred because the benefit is uncertain."},
+ {t:"Forgetting dividends when backing out net income",w:"NI = 154,000 − 98,000 = 56,000",r:"NI = 154,000 − 98,000 + 26,000 = 82,000.",y:"Every practice Q2 opens by asking for net income through the RE roll."},
+ {t:"Putting all of the common stock change in financing",w:"Issuance of common stock 18,000",r:"18,000 − 4,000 of SBC = 14,000 issued for cash; the 4,000 is added back in operating.",y:"Shake Shack, Beet's and Dairy Co. all have SBC credited to common stock."},
+];
+document.getElementById("traps").innerHTML=TRAPS.map(x=>`<div class="card trap"><h2>${x.t}</h2><span class="wrong">${x.w}</span><span class="right">${x.r}</span><div class="why">${x.y}</div></div>`).join("");
+
+/* ---------- Exam intel, dated ---------- */
+const INTEL=[
+ {d:"Sep 1 (intro)",items:["Exams are computer based through Proctorio, which monitors your screen; you still use the computer because 'it's a lot more efficient to come up with the numbers.'","The Excel problems done in class 'feed naturally into the midterm and the final, which are also, particularly the midterm, Excel based.'","Practice midterms, usually the last two years, plus practice finals go on Canvas. He may add questions generated with the course AI tool.","Exams are long-answer questions, 'not like a short multiple choice.' Study the old midterms to see the shape.","Grading option moves weight from the midterm to the final if that helps you.","Do not cram: 'this is not the kind of course where you can cram right before the midterm.' He is available by email the weekend before but gets nervous at midnight questions.","Review sessions are usually sparse until the one right before the midterm, which is packed.","Makeup exams run through OSA; communicate with them early."]},
+ {d:"Sep 2 (intro II)",items:["Internally generated intangibles and the valuation question around them: 'It's not gonna be on the midterm.'","Foreign currency and functional currency: 'We will only touch on it.'"]},
+ {d:"Sep 8 (balance sheet I)",items:["On the indirect cash flow walk-through: 'Typically this is one of the more challenging questions on the midterms to work through, develop a cash flow statement, particularly the operating section.'","The final typically hands you a 10-K and asks you to find information in it; get used to reading the statements and footnotes."]},
+ {d:"Sep 15 (balance sheet II / income statement)",items:["Order of balance sheet lines is not graded. Goodwill before or after intangibles: fine. 'If you put property plant equipment as a current asset, you probably would get something wrong on the exam.'","Questions like 'who do you owe accounts payable to' are not exam questions."]},
+ {d:"Sep 22 (basic procedures)",items:["'We're not gonna ask you facts about accounting. We're gonna have you work accounting problems. It's gonna look more like homework problems.'","'We'll have lots of time on the exams, but we won't ask for definitions.'","Using 'accounts receivable' where the slide says 'accrued revenue' would not be marked wrong.","Cash flow statement again flagged: 'Watch out for the cash flow statement.'"]},
+ {d:"Sep 24 (procedures / cash flow I)",items:["Closing entries: 'typically on the exams I think we don't have you do the closing entries.' You prepare a column that is the income statement and retained earnings together.","Debits and credits: 'on the exams we don't make you do debits and credits. On the exams you can use the balance sheet equation.' You will work on the spreadsheet on the exam, so practice posting there.","Working capital signs: 'it is on the exam typically something that students trip over if you haven't had much accounting yet.'","The hard T-account problem he likes: 'Should we put it on the exam? No... I think your preferences are more important than mine.'"]},
+ {d:"Sep 29 (cash flow II, Dickerson)",items:["Class is back on schedule, so there should be a review session before the midterm; 'we've just got to cover revenue recognition, and those are all the topics covered.'","Two one-sided pages of cheat sheet for the midterm, four total for the final. Write whatever you want on them.","'The midterms we give tend to follow very closely with the previous years.' Problem one is the transactions problem; the cash flow version you can do after today; there is a 10-K problem; revenue recognition is the only one not yet covered.","Pick one practice midterm and do all of it; they are quite similar. A second if you want.","His T-account-to-cash problem: 'It doesn't mean it's gonna be on the exam... I would really get pushback from my colleagues.' Questions will be very similar to the practice midterms.","Backing out capex from balance sheet numbers 'you need to know for the midterm.' T-accounts, the equation, or writing it out all work; get one method down.","Growth versus maintenance capex: 'not going to be on the exams.'","The Dickerson spreadsheet tab is 'prep for the midterm.' About 90% of his spring class nailed the cash flow statement; the ones who did not lost a lot of points.","Laptop, not iPad: Proctorio is known to work on the laptop."]},
+ {d:"Oct 1 (revenue recognition I)",items:["'The cutoff is really revenue recognition.' Keep up with problem sets and lectures for now; shift to review once rev rec is done.","'We've got 3 years of practice exams... they tend to be kind of similar... there'll always be something a little bit different.'","On the cash flow walk-through: 'You definitely have a question like something like this, right, coming on the midterm.'","Typical exam CFS question is the indirect-method reconciliation 'and then maybe a little bit of hunting down things... from the balance sheet.' Working backward through A/R to collections: 'Typically we don't ask you to do that on the exams.'","Pick T-accounts or the equation for backing out numbers and 'settle in on by the midterm.'","Rev rec on the exam: 'you're asked to go through a problem like the Tesla case... Typically, that's the question... go through these 5 steps.' He spent about 10 minutes on GM and said Tesla is the case to get down 'very carefully.'","Format: on your computer with Proctorio, which monitors your screen. Fill it out in Excel and upload the spreadsheet itself, no PDF conversion needed for the midterm. Paper scanned to PDF is also fine.","Asked whether you can bring an Excel template: 'No, you cannot.' He is asking the other instructors whether he can provide a blank one with labeled lines or T-accounts; no answer yet.","PS2 follow-up: retained earnings gets only the net income attributable to common shareholders; the cash flow statement starts from all of net income, including the noncontrolling interest.","You don't declare and pay a dividend on the same date in practice, though problems often say 'declared and paid.'"]},
+ {d:"Practice midterms (2023 to 2025 solutions)",items:["Same four questions every year: Transactions 60, Cash flow 40, Revenue recognition 40, Reading a 10-K 60. Total 200.","Q1 always opens with a missing balance to plug, then has one non-transaction (CEO's portfolio, R&D 'success determined next year'), a loan payoff that bundles prior-year interest, a customer advance partly delivered, and a rent or wage payable roll.","Q2 never gives net income, depreciation or capex directly. Every year has SBC credited to common stock; 2023 and 2024 add treasury stock; 2025 adds amortization and a loss on bond retirement.","Q3 is always a hardware-plus-services bundle with SSPs that sum to more than the price, a sale on Nov 1 or Dec 1, revenue for the first year and the next, and either a credit-sale variant or a 'largest deferral' question. The 2023 question is the Tesla case word for word.","Q3 grading note: 'intermediate steps do not have to be shown for full credit. Step 5 is the main step to be graded.'","Q4 has used Target, Home Depot and Chipotle: consumer and retail 10-Ks with ten short parts at 6 points each (why prepaid is an asset, A/P change, goodwill, payroll paid via the accrual roll, largest expense as % of revenue, gift card liability entries, where dividends show up, PP&E sale proceeds, why A/R and D&A adjust CFO).","Q1 income statement note: a loss on sale of PP&E can sit inside or below operating income; either is accepted."]},
+];
+document.getElementById("intel").innerHTML=INTEL.map(x=>`<div class="card intel-day"><h3>${x.d}</h3><ul class="plain small">${x.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("")+`<div class="card"><h2>Still unanswered</h2><ul class="plain small"><li>Exam length in minutes and the exact time slot on Oct 19.</li><li>Whether he gets approval to provide a blank Excel template.</li><li>One explicit confirmation that receivables and inventory are out (the Oct 1 cutoff implies it).</li><li>Proctorio install instructions, which he said are coming.</li></ul></div>`;
+
+/* ---------- Plan ---------- */
+const PLAN=[
+ {d:"Tue Oct 6",f:"PS4 due before 4:10. Class: Tesla case",t:"Tonight: Peloton (P9) cold. Then the 2023 midterm Q3, which is the Tesla case, against the solution.",s:"Upload the Oct 6 recording and I'll update."},
+ {d:"Wed Oct 7",t:"2025 midterm Q1 (Jersey, Inc.) in Excel, untimed. Grade it.",s:"Every miss goes into Traps."},
+ {d:"Thu Oct 8",f:"Class: receivables (after the cutoff)",t:"2025 Q2 (Dairy Co.) and Catskill Cider (P8).",s:"Backing out NI, depreciation, capex and stock issued is the whole Q2 setup."},
+ {d:"Fri Oct 9",f:"Review session 12:30, OH 2:00",t:"2025 Q3 (NVIDIA) and Q4 (Chipotle). Then Hudson & Pine (P10).",s:"Bring your worst miss of the week to office hours."},
+ {d:"Sat Oct 10",t:"PS5 Question 1 (KLM): it is a full Q1 rehearsal. Do it in the exam layout.",s:""},
+ {d:"Sun Oct 11",t:"2024 midterm, full, timed, in Excel, with a first draft of the two-page cheat sheet.",s:"The dress rehearsal. Note anything you reached for that wasn't on the sheet."},
+ {d:"Mon Oct 12",t:"Grade 2024. Cheat sheet v2. PS5 Question 2 (Costco).",s:"Costco covers membership deferral, returns, principal vs agent and a bundle in one problem."},
+ {d:"Tue Oct 13",f:"Class: inventory I (after the cutoff)",t:"Redo every Missed and Shaky problem cold.",s:""},
+ {d:"Wed Oct 14",t:"Finish PS5. Cheat sheet v3.",s:""},
+ {d:"Thu Oct 15",f:"PS5 due before 4:10. Class: review",t:"He'll work a practice midterm; bring specific questions. Ask him to confirm receivables and inventory are out.",s:""},
+ {d:"Fri Oct 16",f:"Last review session 12:30",t:"2023 midterm Q1, Q2 and Q4, timed (skip Q3, you'll have done Tesla). Final cheat sheet.",s:"Stop adding to the sheet after today."},
+ {d:"Sat Oct 17",t:"Q2 drill: Dickerson and Catskill from blank, 25 minutes each.",s:"Two hours, then stop."},
+ {d:"Sun Oct 18",t:"Shaky items only, 30 minutes. Install and test Proctorio, charge the laptop.",s:"Sleep."},
+ {d:"Mon Oct 19",f:"Midterm",t:"Order by points per minute: Q1 (60) and Q4 (60) carry the most. Set up the equation table first on Q1; fixed accounts before working capital on Q2; Step 5 is what's graded on Q3.",s:""},
+];
+let done={};try{done=JSON.parse(localStorage.getItem("fa-plan2")||"{}")}catch(e){}
+const todayStr=new Date().toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}).replace(",","");
+document.getElementById("plan").innerHTML=`<div class="card">${PLAN.map((p,i)=>`<div class="day ${done[i]?"done":""} ${p.d===todayStr?"today":""}" data-i="${i}"><div class="dd"><b>${p.d.split(" ")[0]}</b>${p.d.split(" ").slice(1).join(" ")}</div><div class="dt">${p.f?`<div class="fixed">${p.f}</div>`:""}<div>${p.t}</div>${p.s?`<div class="s">${p.s}</div>`:""}</div><div class="ck">${done[i]?"✓":""}</div></div>`).join("")}</div>`;
+document.getElementById("plan").addEventListener("click",e=>{const d=e.target.closest(".day");if(!d)return;const i=d.dataset.i;done[i]=!done[i];try{localStorage.setItem("fa-plan2",JSON.stringify(done))}catch(e){}d.classList.toggle("done",!!done[i]);d.querySelector(".ck").textContent=done[i]?"✓":""});
+
+/* ---------- Scope list, tabs, theme, countdown ---------- */
+const sl=document.getElementById("scopeList");
+SCOPE.forEach(s=>{const li=document.createElement("li");li.innerHTML=`<span class="d">${s.d}</span><span class="t"><b>${s.t}</b><span class="s">${s.s}</span></span><span class="tag ${s.st}">${s.st==="in"?(s.note||"in scope"):s.st==="pend"?"pending":s.st==="cb"?"exam":"out"}</span>`;sl.appendChild(li)});
+document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll("nav.tabs button").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll("section.tab").forEach(s=>s.classList.toggle("on",s.id==="tab-"+b.dataset.tab));window.scrollTo({top:0});try{localStorage.setItem("fa-tab",b.dataset.tab)}catch(e){}});
+try{const t=localStorage.getItem("fa-tab");if(t){const b=document.querySelector(`nav.tabs button[data-tab="${t}"]`);if(b)b.click()}}catch(e){}
+const themeBtn=document.getElementById("themeBtn");
+function applyTheme(t){if(t)document.documentElement.setAttribute("data-theme",t);else document.documentElement.removeAttribute("data-theme")}
+let theme=null;try{theme=localStorage.getItem("fa-theme")}catch(e){}applyTheme(theme);
+themeBtn.onclick=()=>{const dark=matchMedia("(prefers-color-scheme: dark)").matches;const cur=document.documentElement.getAttribute("data-theme")||(dark?"dark":"light");theme=cur==="dark"?"light":"dark";applyTheme(theme);try{localStorage.setItem("fa-theme",theme)}catch(e){}};
+const days=Math.ceil((new Date(2026,9,19)-new Date())/86400000);
+document.getElementById("daysLeft").textContent=days>1?`${days} days`:days===1?"Tomorrow":days===0?"Today":"Done";
+</script>
+</body>
+</html>
