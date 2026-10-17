@@ -307,7 +307,7 @@ function renderChecks(el, checks, sk, onChange){
 function classify(name){ const n=name.toLowerCase(); if(/deferred revenue|unearned/.test(n)) return "L"; if(/revenue|expense|cogs|gain|loss|incentive|cost of sales|cost of goods/.test(n)) return "IS"; if(/cash|receivable|inventory|prepaid|pp&e|equipment|truck|accumulated depreciation|allowance/.test(n) && !/payable/.test(n)) return "A"; if(/payable|liability|loan|note|bonds/.test(n)) return "L"; if(/paid-in capital|common stock|treasury|retained earnings/.test(n)) return "E"; return "IS"; }
 const DIV_TAG="Dividend (not income)";
 function convKey(key){ const d={}, tags={}; for(const [a,v] of Object.entries(key)){ const t=classify(a); if(t==="A") d[a]=(d[a]||0)+v; else if(t==="L"||t==="E"){ if(t==="E" && /dividend/i.test(a)){ d["Retained Earnings"]=(d["Retained Earnings"]||0)-v; tags[DIV_TAG]=(tags[DIV_TAG]||0)+Math.abs(v); } else d[a]=(d[a]||0)-v; } else { d["Retained Earnings"]=(d["Retained Earnings"]||0)-v; tags[a]=(tags[a]||0)+Math.abs(v); } } return {d,tags}; }
-function sgn(v){ return (v>0?"+":"−")+fmtA(Math.abs(v)); }
+function sgn(v){ if(Math.abs(v)<0.005) return "0"; return (v>0?"+":"−")+fmtA(Math.abs(v)); }
 function eqLine(conv){ const parts=[]; for(const [a,v] of Object.entries(conv.d)){ if(Math.abs(v)<0.005) continue; if(a==="Retained Earnings"){ const tg=Object.entries(conv.tags).map(([n,m])=>`${n} ${fmtA(m)}`).join(", "); parts.push(`<div class="${v>0?'up':'dn'}"><span>Retained Earnings <span class="muted">(${esc(tg)})</span></span><b>${sgn(v)}</b></div>`); } else parts.push(`<div class="${v>0?'up':'dn'}"><span>${esc(a)}</span><b>${sgn(v)}</b></div>`); } return parts.length? `<div class="je">${parts.join("")}</div>` : `<div class="je"><div><span>No entry</span><b></b></div></div>`; }
 
 function renderEntries(el, chart, entries, sk, onChange){
@@ -325,7 +325,8 @@ function renderEntries(el, chart, entries, sk, onChange){
     const addLine = () => { lines.insertAdjacentHTML("beforeend", lineHTML()); const ln = lines.lastElementChild; ln.querySelector(".x").onclick = () => ln.remove(); ln.querySelector(".acct").onchange = ev => { ln.querySelector(".tag").style.display = ev.target.value==="Retained Earnings" ? "" : "none"; }; };
     addLine(); addLine();
     const lock = () => box.querySelectorAll("select,input,button.addl,button.chk,button.none").forEach(x=>x.disabled=true);
-    const paint = () => { const s = ckGet(sk,e.id); if(s.st==="right"||s.st==="right2"){ fb.className="fb show ok"; fb.innerHTML=`<b>Correct${s.st==="right2"?" (after a nudge)":""}.</b>`+eqLine(K); lock(); } else if(s.st==="revealed"){ fb.className="fb show rev"; fb.innerHTML=`<b>Here is the row.</b>`+eqLine(K)+(s.diff?`<div class="small muted" style="margin-top:4px">Off on: ${esc(s.diff)}</div>`:""); lock(); } else if(s.att===1){ fb.className="fb show nudge"; fb.innerHTML=`<b>Not it.</b> ${e.nudge}`; } };
+    const yours = (s) => s.yours? `<div class="small" style="margin-top:6px"><b>What you had:</b></div>`+eqLine({d:s.yours.d||{},tags:s.yours.tags||{}}) : "";
+    const paint = () => { const s = ckGet(sk,e.id); if(s.st==="right"||s.st==="right2"){ fb.className="fb show ok"; fb.innerHTML=`<b>Correct${s.st==="right2"?" (after a nudge)":""}.</b>`+eqLine(K); lock(); } else if(s.st==="revealed"){ fb.className="fb show rev"; fb.innerHTML=`<b>The row:</b>`+eqLine(K)+yours(s)+(s.diff?`<div class="small muted" style="margin-top:4px">Off on: ${esc(s.diff)}</div>`:""); lock(); } else if(s.att===1){ fb.className="fb show nudge"; fb.innerHTML=`<b>Not it.</b> ${e.nudge}`+yours(s); } };
     const grade = (user, claimNone) => {
       const s = ckGet(sk,e.id); const tol = 0.5; const keyEmpty = Object.keys(K.d).length===0;
       let ok=false, diff=[];
@@ -333,13 +334,13 @@ function renderEntries(el, chart, entries, sk, onChange){
       else {
         if(user.missingTag){ fb.className="fb show nudge"; fb.innerHTML="Retained Earnings moved: name the revenue or expense (or dividend) on that line. That is your Note column."; return; }
         let A=0,LE=0; for(const [a,v] of Object.entries(user.d)){ if(classify(a)==="A") A+=v; else LE+=v; }
-        if(Math.abs(A-LE)>tol){ const att=s.att+1; ckSet(sk,e.id,{att, st: att>=2?"revealed":null, diff:`assets ${sgn(A)} vs liabilities + equity ${sgn(LE)}`}); if(att<2){ fb.className="fb show nudge"; fb.innerHTML=`<b>Row does not balance.</b> Assets ${sgn(A)}, liabilities plus equity ${sgn(LE)}. ${e.nudge}`; } else paint(); if(onChange) onChange(); return; }
+        if(Math.abs(A-LE)>tol){ const att=s.att+1; ckSet(sk,e.id,{att, st: att>=2?"revealed":null, yours:{d:user.d,tags:user.tags}, diff:`assets ${sgn(A)} vs liabilities + equity ${sgn(LE)}`}); if(att<2){ fb.className="fb show nudge"; fb.innerHTML=`<b>Row does not balance.</b> Assets ${sgn(A)}, liabilities plus equity ${sgn(LE)}. ${e.nudge}`; } else paint(); if(onChange) onChange(); return; }
         const accts=new Set([...Object.keys(K.d),...Object.keys(user.d)]); accts.forEach(a=>{ if(Math.abs((K.d[a]||0)-(user.d[a]||0))>tol) diff.push(a); });
         const tg=new Set([...Object.keys(K.tags),...Object.keys(user.tags)]); tg.forEach(a=>{ if(Math.abs((K.tags[a]||0)-(user.tags[a]||0))>tol) diff.push("Note: "+a); });
         ok = diff.length===0 && !keyEmpty;
         if(keyEmpty && Object.keys(user.d).length){ ok=false; diff=["No entry was needed"]; }
       }
-      if(ok) ckSet(sk,e.id,{att:s.att,st:s.att===0?"right":"right2"}); else { const att=s.att+1; ckSet(sk,e.id,{att, st: att>=2?"revealed":null, diff: diff.join(", ")}); }
+      if(ok) ckSet(sk,e.id,{att:s.att,st:s.att===0?"right":"right2"}); else { const att=s.att+1; ckSet(sk,e.id,{att, st: att>=2?"revealed":null, yours: claimNone? {d:{},tags:{}} : {d:user.d,tags:user.tags}, diff: diff.join(", ")}); }
       paint(); if(onChange) onChange();
     };
     box.querySelector(".addl").onclick = addLine;
